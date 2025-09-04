@@ -1,2 +1,2 @@
 # kat-yoga-site
-Kat's yoga website
+A custom yoga website using HTML and CSS to showcase my teaching offerings, class schedule, and brand identity.
