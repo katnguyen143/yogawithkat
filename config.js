@@ -87,7 +87,7 @@ var config = {
             date: 'Aug - Sept 2025 • 2 months',
             description: 'Currently teaching 3–4 classes per week including yang-to-yin sunset flows, handstand & inversion play, and donation-based Flow for All. This is where my heart lives now — in movement, community, and ocean breeze.',
             location: {
-                center: [100.0, 9.7],
+                center: [100.035472, 9.694583],
                 zoom: 13,
                 pitch: 45,
                 bearing: 0

@@ -10,13 +10,6 @@ const map = new mapboxgl.Map({
     interactive: false
 });
 
-let marker;
-if (config.showMarkers) {
-    marker = new mapboxgl.Marker({ color: config.markerColor })
-        .setLngLat(config.chapters[0].location.center)
-        .addTo(map);
-}
-
 // Build story steps
 const story = document.getElementById('story');
 const features = document.createElement('div');
@@ -54,91 +47,108 @@ config.chapters.forEach((record, idx) => {
 
 story.appendChild(features);
 
-// Helper to compute distance
-function distanceKm(start, end) {
-    const R = 6371;
-    const toRad = d => d * Math.PI / 180;
-    const dLat = toRad(end[1] - start[1]);
-    const dLon = toRad(end[0] - start[0]);
-    const lat1 = toRad(start[1]);
-    const lat2 = toRad(end[1]);
-    const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
-    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
 map.on('load', () => {
-    // Initialize empty line
-    map.addSource('journey-line', {
+
+    // Create a pulsing dot as a canvas source
+    const size = 200;
+
+    const pulsingDot = {
+        width: size,
+        height: size,
+        data: new Uint8Array(size * size * 4),
+
+        onAdd: function () {
+            const canvas = document.createElement('canvas');
+            canvas.width = this.width;
+            canvas.height = this.height;
+            this.context = canvas.getContext('2d');
+        },
+
+        render: function () {
+            const duration = 1000;
+            const t = (performance.now() % duration) / duration;
+
+            const radius = (size / 2) * 0.3;
+            const outerRadius = (size / 2) * 0.7 * t + radius;
+            const context = this.context;
+
+            // clear canvas
+            context.clearRect(0, 0, this.width, this.height);
+
+            // draw outer circle
+            context.beginPath();
+            context.arc(size / 2, size / 2, outerRadius, 0, Math.PI * 2);
+            context.fillStyle = `rgba(0, 128, 128, ${1 - t})`; // teal with fading
+            context.fill();
+
+            // draw inner circle
+            context.beginPath();
+            context.arc(size / 2, size / 2, radius, 0, Math.PI * 2);
+            context.fillStyle = 'teal';
+            context.strokeStyle = 'white';
+            context.lineWidth = 2 + 2 * t;
+            context.fill();
+            context.stroke();
+
+            // update image
+            this.data = context.getImageData(0, 0, this.width, this.height).data;
+
+            // keep repainting
+            map.triggerRepaint();
+
+            return true;
+        }
+    };
+
+    map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+
+    // Add source & layer for initial position
+    map.addSource('pulsing-point', {
         type: 'geojson',
-        data: { type: 'Feature', geometry: { type: 'LineString', coordinates: [] } }
-    });
-
-    map.addLayer({
-        id: 'journey-line-layer',
-        type: 'line',
-        source: 'journey-line',
-        layout: { 'line-cap': 'round', 'line-join': 'round' },
-        paint: { 'line-color': '#88C0D0', 'line-width': 4, 'line-opacity': 0.8 }
-    });
-
-    // Optional: add points for each chapter
-    const points = config.chapters.map(c => turf.point(c.location.center));
-    map.addSource('chapter-points', {
-        type: 'geojson',
-        data: turf.featureCollection(points)
-    });
-    map.addLayer({
-        id: 'chapter-points-layer',
-        type: 'circle',
-        source: 'chapter-points',
-        paint: { 'circle-radius': 6, 'circle-color': '#D08770' }
-    });
-
-    const scroller = scrollama();
-    let pathSoFar = [];  // empty at start
-    let lineInterval;
-
-    scroller.setup({ step: '.step', offset: 0.6, progress: true })
-        .onStepEnter(response => {
-            const chapter = config.chapters.find(c => c.id === response.element.id);
-            const target = chapter.location.center;
-            const last = pathSoFar.length ? pathSoFar[pathSoFar.length - 1] : config.chapters[0].location.center;
-
-            if (config.showMarkers && marker) marker.setLngLat(target);
-
-            // compute great-circle arc
-            let steps = 200;
-            let arc = turf.greatCircle(turf.point(last), turf.point(target), { npoints: steps }).geometry.coordinates;
-
-            // make sure it starts at last
-            if (Math.hypot(arc[0][0] - last[0], arc[0][1] - last[1]) > 0.01) arc.reverse();
-
-            if (lineInterval) clearInterval(lineInterval);
-            let i = 0;
-            const seg = [];
-            const duration = 2000;
-            const intervalTime = duration / arc.length;
-
-            lineInterval = setInterval(() => {
-                if (i < arc.length) {
-                    seg.push(arc[i]);
-                    map.getSource('journey-line').setData({
-                        type: 'Feature',
-                        geometry: { type: 'LineString', coordinates: [...pathSoFar, ...seg] }
-                    });
-                    i++;
-                } else {
-                    clearInterval(lineInterval);
-                    pathSoFar = [...pathSoFar, ...arc];
+        data: {
+            type: 'FeatureCollection',
+            features: [{
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: config.chapters[0].location.center
                 }
-            }, intervalTime);
+            }]
+        }
+    });
 
+    map.addLayer({
+        id: 'pulsing-point-layer',
+        type: 'symbol',
+        source: 'pulsing-point',
+        layout: { 'icon-image': 'pulsing-dot' }
+    });
+
+    // Scrollama logic
+    const scroller = scrollama();
+
+    scroller.setup({ step: '.step', offset: 0.5 })
+        .onStepEnter(response => {
+            const idx = config.chapters.findIndex(c => c.id === response.element.id);
+            if (idx === -1) return;
+            const loc = config.chapters[idx].location;
+
+            // Move pulsing dot
+            map.getSource('pulsing-point').setData({
+                type: 'FeatureCollection',
+                features: [{
+                    type: 'Feature',
+                    geometry: { type: 'Point', coordinates: loc.center }
+                }]
+            });
+
+            // Fly to location
             map.flyTo({
-                center: target,
-                zoom: chapter.location.zoom,
-                bearing: chapter.location.bearing,
-                pitch: chapter.location.pitch,
-                duration: duration,
+                center: loc.center,
+                zoom: loc.zoom,
+                bearing: loc.bearing,
+                pitch: loc.pitch,
+                duration: 2000,
                 essential: true
             });
 
@@ -146,4 +156,3 @@ map.on('load', () => {
         })
         .onStepExit(response => response.element.classList.remove('active'));
 });
-
