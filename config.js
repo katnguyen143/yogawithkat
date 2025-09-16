@@ -47,7 +47,7 @@ var config = {
         },
         {
             id: 'bali-training',
-            title: '200-hr Yoga Teacher Training – Bali Yoga Ashram (June 2025)',
+            title: 'Yoga Teacher Training (200-HR) – Bali Yoga Ashram (June 2025)',
             date: 'June 2025',
             description: 'Earned my 200-hour certification in Bali, studying Ashtanga and Vinyasa yoga, yogic philosophy, pranayama, anatomy, and alignment. This was a deep dive into the roots of my practice.',
             location: {
