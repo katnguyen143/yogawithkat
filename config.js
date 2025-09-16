@@ -23,7 +23,7 @@ var config = {
     chapters: [
         {
             id: 'berkeley-outsiders',
-            title: 'Outsiders – UC Berkeley, California',
+            title: 'Outsiders – UC Berkeley, California (Jan - Dec 2024 • 1 year)',
             description: 'Instructed weekly yoga sessions tailored for BIPOC communities, emphasizing accessibility, inclusion, and mindfulness. This was my first teaching experience, rooted in care and community.',
             location: {
                 center: [-122.259, 37.871],
@@ -34,7 +34,7 @@ var config = {
         },
         {
             id: 'berkeley-ta',
-            title: 'Teaching Assistant – UC Berkeley PE Dept',
+            title: 'Teaching Assistant – UC Berkeley PE Dept (Aug 2024 - Dec 2024 • 4 months)',
             description: 'Supported Ashtanga-Vinyasa Level 1 classes under Toni Mar. I learned to build sequences, guide flows, offer hands-on adjustments, and create newsletters and a syllabus that reflected my journey as a TA.',
             location: {
                 center: [-122.259, 37.871],
@@ -45,7 +45,7 @@ var config = {
         },
         {
             id: 'bali-training',
-            title: 'Yoga Teacher Training – Bali Yoga Ashram',
+            title: '200-hr Yoga Teacher Training – Bali Yoga Ashram (June 2025)',
             description: 'Earned my 200-hour certification in Bali, studying Ashtanga and Vinyasa yoga, yogic philosophy, pranayama, anatomy, and alignment. This was a deep dive into the roots of my practice.',
             location: {
                 center: [115.1889, -8.4095],
@@ -56,7 +56,7 @@ var config = {
         },
         {
             id: 'tokyo-hitotsubashi',
-            title: 'Guest Teacher – Hitotsubashi University, Tokyo',
+            title: 'Guest Teacher – Hitotsubashi University, Tokyo (July 2025)',
             description: 'Invited by Toshi Ogura to teach three classes and share my journey as a yoga teacher. It was a joy to connect with students and reflect on my training.',
             location: {
                 center: [139.767, 35.681],
@@ -67,7 +67,7 @@ var config = {
         },
         {
             id: 'nakagawa-zenyoga',
-            title: 'Zen Yoga Study – Nakagawa Village, Japan',
+            title: 'Zen Yoga Study – Nakagawa Village, Japan (Aug 2025)',
             description: 'Studied Zen Yoga with Genboku Sensei, deepening my understanding of zazen and the art of letting go. This experience shifted my perspective on ego and presence.',
             location: {
                 center: [139.2, 36.1],
@@ -78,7 +78,7 @@ var config = {
         },
         {
             id: 'koh-phangan-nestra',
-            title: 'Yoga Instructor – Nestra Beach Shala, Thailand',
+            title: 'Yoga Instructor – Nestra Beach Shala, Thailand (Aug - Sept 2025 • 2 months)',
             description: 'Currently teaching 3–4 classes per week including yang-to-yin sunset flows, handstand & inversion play, and donation-based Flow for All. This is where my heart lives now — in movement, community, and ocean breeze.',
             location: {
                 center: [100.0, 9.7],
