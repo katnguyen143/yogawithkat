@@ -92,6 +92,7 @@ map.on('load', () => {
     // Scroller setup
 
     const scroller = scrollama();
+    const visitedChapters = new Set();
     let currentCoords = [];
 
     scroller
@@ -100,10 +101,15 @@ map.on('load', () => {
             offset: 0.5,
             progress: true
         })
+
         .onStepEnter(response => {
             const chapterIndex = config.chapters.findIndex(chap => chap.id === response.element.id);
             const chapter = config.chapters[chapterIndex];
             const targetCoords = chapter.location.center;
+            const chapterId = response.element.id;
+
+            if (visitedChapters.has(chapterId)) return;
+            visitedChapters.add(chapterId);
 
             map.flyTo({
                 center: chapter.location.center,
@@ -124,20 +130,19 @@ map.on('load', () => {
 
             const lastCoord = currentCoords[currentCoords.length - 1];
 
-            map.once('moveend', () => {
-                const arc = turf.greatCircle(
-                    turf.point(lastCoord),
-                    turf.point(targetCoords),
-                    { npoints: 60 }
-                );
+            const arc = turf.greatCircle(
+                turf.point(lastCoord),
+                turf.point(targetCoords),
+                { npoints: 60 }
+            );
 
-                const fullArc = arc.geometry.coordinates;
-                let step = 0;
-                const arcSegment = [];
+            const fullArc = arc.geometry.coordinates;
+            let step = 0;
+            const arcSegment = [];
 
-                function drawArcStep() {
+            const interval = setInterval(() => {
+                if (step < fullArc.length) {
                     arcSegment.push(fullArc[step]);
-
                     map.getSource('journey-line').setData({
                         type: 'Feature',
                         geometry: {
@@ -145,27 +150,15 @@ map.on('load', () => {
                             coordinates: [...currentCoords, ...arcSegment]
                         }
                     });
-
                     step++;
-                    if (step < fullArc.length) {
-                        requestAnimationFrame(drawArcStep);
-                    } else {
-                        currentCoords.push(targetCoords);
-                    }
+                } else {
+                    clearInterval(interval);
+                    currentCoords = [...currentCoords, ...fullArc];
                 }
+            }, 3000 / fullArc.length);
 
-                // start both at the same time
-                map.flyTo({
-                    center: chapter.location.center,
-                    zoom: chapter.location.zoom,
-                    bearing: chapter.location.bearing,
-                    pitch: chapter.location.pitch,
-                    duration: 3000,
-                    essential: true
-                });
-                drawArcStep(); // start line animation immediately
+            response.element.classList.add('active')
         })
-
 
 
         .onStepExit(response => {
