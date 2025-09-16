@@ -35,7 +35,7 @@ var config = {
         },
         {
             id: 'berkeley-ta',
-            title: 'Teaching Assistant – UC Berkeley PE Dept (Aug 2024 - Dec 2024 • 4 months)',
+            title: 'Teaching Assistant – UC Berkeley PE Dept',
             date: 'Aug – Dec 2024 · 4 months',
             description: 'Supported Ashtanga-Vinyasa Level 1 classes under Toni Mar. I learned to build sequences, guide flows, offer hands-on adjustments, and create newsletters and a syllabus that reflected my journey as a TA.',
             location: {
@@ -47,7 +47,7 @@ var config = {
         },
         {
             id: 'bali-training',
-            title: '200 Hour Yoga Teacher Training – Bali Yoga Ashram (June 2025)',
+            title: '200 Hour Yoga Teacher Training – Bali Yoga Ashram',
             date: 'June 2025',
             description: 'Earned my 200-hour certification in Bali, studying Ashtanga and Vinyasa yoga, yogic philosophy, pranayama, anatomy, and alignment. This was a deep dive into the roots of my practice.',
             location: {
@@ -59,7 +59,7 @@ var config = {
         },
         {
             id: 'tokyo-hitotsubashi',
-            title: 'Guest Teacher – Hitotsubashi University, Tokyo (July 2025)',
+            title: 'Guest Teacher – Hitotsubashi University, Tokyo',
             date: 'July 2025',
             description: 'Invited by Toshi Ogura to teach three classes and share my journey as a yoga teacher. It was a joy to connect with students and reflect on my training.',
             location: {
