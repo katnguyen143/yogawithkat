@@ -1,12 +1,10 @@
 var config = {
     // style: 'mapbox://styles/mapbox/streets-v12',
     // leave commented to use Mapbox Standard Style
-    accessToken: 'sk.eyJ1Ijoia2F0bmd1eWVuIiwiYSI6ImNtZmd3ZWM1YTA2MTAyaXF0Y3Ztam1nZm4ifQ.rqTe-9F52XeLf_6Pe_a6ZA',
+    accessToken: 'pk.eyJ1Ijoia2F0bmd1eWVuIiwiYSI6ImNtZmd2azY3MTA1Ynoya3B5ajR1aWU4MjAifQ.p68L4RzmRLZ8fZzy3JxzfA',
     showMarkers: true,
     markerColor: '#3FB1CE',
     //projection: 'equirectangular',
-    //Read more about available projections here
-    //https://docs.mapbox.com/mapbox-gl-js/example/projections/
     inset: true,
     insetOptions: {
         markerColor: 'orange'
@@ -20,7 +18,7 @@ var config = {
     subtitle: 'The Storytelling Template helps you create an awesome animated map story with ease.',
     byline: 'By a I.M. Amapper',
     footer: 'Source: source citations, etc. <br> Created using <a href="https://github.com/mapbox/storytelling" target="_blank">Mapbox Storytelling</a> template.',
-    chapters = [
+    chapters: [
         {
             id: 'berkeley-outsiders',
             title: 'Outsiders – UC Berkeley, California',
