@@ -18,6 +18,8 @@ var config = {
     subtitle: 'The Storytelling Template helps you create an awesome animated map story with ease.',
     byline: 'By a I.M. Amapper',
     footer: 'Source: source citations, etc. <br> Created using <a href="https://github.com/mapbox/storytelling" target="_blank">Mapbox Storytelling</a> template.',
+
+
     chapters: [
         {
             id: 'berkeley-outsiders',
@@ -85,6 +87,6 @@ var config = {
                 bearing: 0
             }
         }
-    ];
+    ]
 
 };
