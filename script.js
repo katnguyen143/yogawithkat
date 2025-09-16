@@ -36,6 +36,12 @@ config.chapters.forEach((record, idx) => {
         description.innerHTML = record.description;
         chapter.appendChild(description);
     }
+    if (record.date) {
+        const date = document.createElement('p');
+        date.innerText = record.date;
+        date.classList.add('date-pill');
+        chapter.appendChild(date);
+    }
 
     container.setAttribute('id', record.id);
     container.classList.add('step');
@@ -63,12 +69,7 @@ scroller
         if (config.showMarkers && marker) {
             marker.setLngLat(chapter.location.center);
         }
-        if (record.date) {
-            const date = document.createElement('p');
-            date.innerText = record.date;
-            date.classList.add('date-pill');
-            chapter.appendChild(date);
-        }
+        
     })
     .onStepExit(response => {
         response.element.classList.remove('active');
