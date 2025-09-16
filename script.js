@@ -60,8 +60,14 @@ scroller
         const chapter = config.chapters.find(chap => chap.id === response.element.id);
         response.element.classList.add('active');
         map.flyTo(chapter.location);
-        if (config.showMarkers) {
+        if (config.showMarkers && marker) {
             marker.setLngLat(chapter.location.center);
+        }
+        if (record.date) {
+            const date = document.createElement('p');
+            date.innerText = record.date;
+            date.classList.add('date-pill');
+            chapter.appendChild(date);
         }
     })
     .onStepExit(response => {
