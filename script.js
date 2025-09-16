@@ -102,11 +102,28 @@ map.on('load', () => {
         })
         .onStepEnter(response => {
             const chapterIndex = config.chapters.findIndex(chap => chap.id === response.element.id);
-            const targetCoords = config.chapters[chapterIndex].location.center;
+            const chapter = config.chapters[chapterIndex];
+            const targetCoords = chapter.location.center;
+
+            // fly to the chapter location
+            map.flyTo({
+                center: chapter.location.center,
+                zoom: chapter.location.zoom,
+                bearing: chapter.location.bearing,
+                pitch: chapter.location.pitch,
+                duration: 2000 // optional: smooth transition
+            });
+
+            // move the marker
+            if (config.showMarkers && marker) {
+                marker.setLngLat(targetCoords);
+            }
+
+            // animate the line
             const lastCoord = currentCoords.length ? currentCoords[currentCoords.length - 1] : targetCoords;
 
             if (!currentCoords.length) {
-                currentCoords = [targetCoords]; 
+                currentCoords = [targetCoords];
             }
 
             const steps = 30;
@@ -134,8 +151,11 @@ map.on('load', () => {
                     currentCoords.push(targetCoords); // finalize
                 }
             }
+
             animateLine();
+            response.element.classList.add('active');
         })
+
 
         .onStepExit(response => {
             response.element.classList.remove('active');
