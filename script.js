@@ -101,7 +101,6 @@ map.on('load', () => {
             offset: 0.5,
             progress: true
         })
-
         .onStepEnter(response => {
             const chapterIndex = config.chapters.findIndex(chap => chap.id === response.element.id);
             const chapter = config.chapters[chapterIndex];
@@ -111,6 +110,7 @@ map.on('load', () => {
             if (visitedChapters.has(chapterId)) return;
             visitedChapters.add(chapterId);
 
+            // Fly to the chapter location
             map.flyTo({
                 center: chapter.location.center,
                 zoom: chapter.location.zoom,
@@ -120,49 +120,53 @@ map.on('load', () => {
                 essential: true
             });
 
+            // Move the marker
             if (config.showMarkers && marker) {
                 marker.setLngLat(targetCoords);
             }
 
+            // Initialize journey path
             if (!currentCoords.length) {
                 currentCoords = [config.chapters[0].location.center];
             }
 
             const lastCoord = currentCoords[currentCoords.length - 1];
 
-            const arc = turf.greatCircle(
-                turf.point(lastCoord),
-                turf.point(targetCoords),
-                { npoints: 60 }
-            );
+            // Wait for map to finish moving
+            map.once('moveend', () => {
+                const arc = turf.greatCircle(
+                    turf.point(lastCoord),
+                    turf.point(targetCoords),
+                    { npoints: 60 }
+                );
 
-            const fullArc = arc.geometry.coordinates;
-            let step = 0;
-            const arcSegment = [];
+                const fullArc = arc.geometry.coordinates;
+                let step = 0;
+                const arcSegment = [];
 
-            const interval = setInterval(() => {
-                if (step < fullArc.length) {
-                    arcSegment.push(fullArc[step]);
-                    map.getSource('journey-line').setData({
-                        type: 'Feature',
-                        geometry: {
-                            type: 'LineString',
-                            coordinates: [...currentCoords, ...arcSegment]
-                        }
-                    });
-                    step++;
-                } else {
-                    clearInterval(interval);
-                    currentCoords = [...currentCoords, ...fullArc];
-                }
-            }, 3000 / fullArc.length);
+                const interval = setInterval(() => {
+                    if (step < fullArc.length) {
+                        arcSegment.push(fullArc[step]);
+                        map.getSource('journey-line').setData({
+                            type: 'Feature',
+                            geometry: {
+                                type: 'LineString',
+                                coordinates: [...currentCoords, ...arcSegment]
+                            }
+                        });
+                        step++;
+                    } else {
+                        clearInterval(interval);
+                        currentCoords = [...currentCoords, ...fullArc];
+                    }
+                }, 3000 / fullArc.length); // match flyTo duration
+            });
 
-            response.element.classList.add('active')
+            response.element.classList.add('active');
         })
-
-
         .onStepExit(response => {
             response.element.classList.remove('active');
         });
+
 });
 
