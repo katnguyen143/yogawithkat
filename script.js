@@ -123,44 +123,47 @@ map.on('load', () => {
             }
 
             const lastCoord = currentCoords[currentCoords.length - 1];
-            const steps = 60;
 
-            function animateLine() {
-                const interpolatedCoords = [];
+            map.once('moveend', () => {
+                const arc = turf.greatCircle(
+                    turf.point(lastCoord),
+                    turf.point(targetCoords),
+                    { npoints: 60 }
+                );
+
+                const fullArc = arc.geometry.coordinates;
                 let step = 0;
+                const arcSegment = [];
 
-                function drawStep() {
-                    step++;
-                    const interpolated = [
-                        lastCoord[0] + (targetCoords[0] - lastCoord[0]) * (step / steps),
-                        lastCoord[1] + (targetCoords[1] - lastCoord[1]) * (step / steps)
-                    ];
-
-                    interpolatedCoords.push(interpolated);
+                function drawArcStep() {
+                    arcSegment.push(fullArc[step]);
 
                     map.getSource('journey-line').setData({
                         type: 'Feature',
                         geometry: {
                             type: 'LineString',
-                            coordinates: [...currentCoords, ...interpolatedCoords]
+                            coordinates: [...currentCoords, ...arcSegment]
                         }
                     });
 
-                    if (step < steps) {
-                        requestAnimationFrame(drawStep);
+                    step++;
+                    if (step < fullArc.length) {
+                        requestAnimationFrame(drawArcStep);
                     } else {
                         currentCoords.push(targetCoords);
                     }
                 }
 
-                drawStep();
-            }
-
-            map.once('moveend', () => {
-                animateLine();
-            });
-
-            response.element.classList.add('active');
+                // start both at the same time
+                map.flyTo({
+                    center: chapter.location.center,
+                    zoom: chapter.location.zoom,
+                    bearing: chapter.location.bearing,
+                    pitch: chapter.location.pitch,
+                    duration: 3000,
+                    essential: true
+                });
+                drawArcStep(); // start line animation immediately
         })
 
 
