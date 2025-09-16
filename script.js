@@ -66,12 +66,28 @@ scroller
     .onStepEnter(response => {
         const chapter = config.chapters.find(chap => chap.id === response.element.id);
         response.element.classList.add('active');
+
+        // Fly to the current location
         map.flyTo(chapter.location);
+
+        // Move the marker
         if (config.showMarkers && marker) {
             marker.setLngLat(chapter.location.center);
         }
-        
+
+        // Animate the line segment-by-segment
+        const chapterIndex = config.chapters.findIndex(chap => chap.id === response.element.id);
+        const coords = config.chapters.slice(0, chapterIndex + 1).map(chap => chap.location.center);
+
+        map.getSource('journey-line').setData({
+            type: 'Feature',
+            geometry: {
+                type: 'LineString',
+                coordinates: coords
+            }
+        });
     })
+
     .onStepExit(response => {
         response.element.classList.remove('active');
     });
@@ -85,7 +101,7 @@ map.on('load', () => {
             type: 'Feature',
             geometry: {
                 type: 'LineString',
-                coordinates: coordinates
+                coordinates: []
             }
         }
     });
@@ -99,7 +115,7 @@ map.on('load', () => {
             'line-join': 'round'
         },
         paint: {
-            'line-color': '#FF6F61', // coral pink?
+            'line-color': '#88C0D0', // soft ocean blue
             'line-width': 4,
             'line-opacity': 0.8
         }
