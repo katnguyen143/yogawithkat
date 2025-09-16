@@ -75,3 +75,34 @@ scroller
     .onStepExit(response => {
         response.element.classList.remove('active');
     });
+
+const coordinates = config.chapters.map(chap => chap.location.center);
+
+map.on('load', () => {
+    map.addSource('journey-line', {
+        type: 'geojson',
+        data: {
+            type: 'Feature',
+            geometry: {
+                type: 'LineString',
+                coordinates: coordinates
+            }
+        }
+    });
+
+    map.addLayer({
+        id: 'journey-line-layer',
+        type: 'line',
+        source: 'journey-line',
+        layout: {
+            'line-cap': 'round',
+            'line-join': 'round'
+        },
+        paint: {
+            'line-color': '#FF6F61', // coral pink?
+            'line-width': 4,
+            'line-opacity': 0.8
+        }
+    });
+});
+
