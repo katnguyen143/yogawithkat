@@ -592,3 +592,12 @@ footer {
     margin-bottom: 24px;
 }
 
+.date-pill {
+    font-style: italic;
+    color: #777;
+    font-size: 0.95rem;
+    margin-top: -6px;
+    margin-bottom: 12px;
+}
+
+
