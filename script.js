@@ -111,7 +111,8 @@ map.on('load', () => {
                 zoom: chapter.location.zoom,
                 bearing: chapter.location.bearing,
                 pitch: chapter.location.pitch,
-                duration: 2000 // optional: smooth transition
+                duration: 3000, // 3 seconds
+                essential: true
             });
 
             // move the marker
@@ -130,28 +131,36 @@ map.on('load', () => {
             let step = 0;
 
             function animateLine() {
-                step++;
-                const interpolated = [
-                    lastCoord[0] + (targetCoords[0] - lastCoord[0]) * (step / steps),
-                    lastCoord[1] + (targetCoords[1] - lastCoord[1]) * (step / steps)
-                ];
+                const interpolatedCoords = [];
+                const steps = 60; // slower, smoother
+                let step = 0;
 
-                const updatedCoords = [...currentCoords, interpolated];
-                map.getSource('journey-line').setData({
-                    type: 'Feature',
-                    geometry: {
-                        type: 'LineString',
-                        coordinates: updatedCoords
+                function drawStep() {
+                    step++;
+                    const interpolated = [
+                        lastCoord[0] + (targetCoords[0] - lastCoord[0]) * (step / steps),
+                        lastCoord[1] + (targetCoords[1] - lastCoord[1]) * (step / steps)
+                    ];
+
+                    interpolatedCoords.push(interpolated);
+
+                    map.getSource('journey-line').setData({
+                        type: 'Feature',
+                        geometry: {
+                            type: 'LineString',
+                            coordinates: [...currentCoords, ...interpolatedCoords]
+                        }
+                    });
+
+                    if (step < steps) {
+                        requestAnimationFrame(drawStep);
+                    } else {
+                        currentCoords.push(targetCoords); // finalize
                     }
-                });
-
-                if (step < steps) {
-                    requestAnimationFrame(animateLine);
-                } else {
-                    currentCoords.push(targetCoords); // finalize
                 }
-            }
 
+                drawStep();
+            }
             animateLine();
             response.element.classList.add('active');
         })
