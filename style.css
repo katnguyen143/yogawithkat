@@ -525,6 +525,18 @@ footer {
     z-index: 0;
 }
 
+    #map::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        pointer-events: none;
+    }
+
+
 #story {
     position: relative;
     z-index: 1;
@@ -535,8 +547,14 @@ footer {
 }
 
 .step {
-    margin-bottom: 48px;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
 }
+
+    .step.active {
+        opacity: 1;
+    }
+
 
 .chapter h3 {
     font-size: 1.4rem;

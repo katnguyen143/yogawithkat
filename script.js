@@ -10,10 +10,12 @@ const map = new mapboxgl.Map({
     interactive: false
 });
 
+let marker;
 if (config.showMarkers) {
-    const marker = new mapboxgl.Marker({ color: config.markerColor });
+    marker = new mapboxgl.Marker({ color: config.markerColor });
     marker.setLngLat(config.chapters[0].location.center).addTo(map);
 }
+
 
 const story = document.getElementById('story');
 const features = document.createElement('div');
