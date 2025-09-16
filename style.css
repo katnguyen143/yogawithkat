@@ -504,14 +504,6 @@ footer {
         margin-bottom: 12px;
     }
 
-    #journey-intro p {
-        font-size: 1rem;
-        color: var(--muted);
-        max-width: 720px;
-        margin: 0 auto 1.6rem;
-        text-align: center;
-    }
-
 
 .link-journey {
     color: var(--teal) !important;
