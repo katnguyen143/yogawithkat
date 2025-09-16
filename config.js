@@ -51,7 +51,7 @@ var config = {
             date: 'June 2025',
             description: 'Earned my 200-hour certification in Bali, studying Ashtanga and Vinyasa yoga, yogic philosophy, pranayama, anatomy, and alignment. This was a deep dive into the roots of my practice.',
             location: {
-                center: [115.1889, -8.4095],
+                center: [115.28745931505563, -8.539585723396137],
                 zoom: 10,
                 pitch: 45,
                 bearing: 0
@@ -63,7 +63,7 @@ var config = {
             date: 'July 2025',
             description: 'Invited by Toshi Ogura to teach three classes and share my journey as a yoga teacher. It was a joy to connect with students and reflect on my training.',
             location: {
-                center: [139.767, 35.681],
+                center: [139.44541479438266, 35.69462892771574],
                 zoom: 12,
                 pitch: 45,
                 bearing: -20
@@ -75,7 +75,7 @@ var config = {
             date: 'August 2025',
             description: 'Studied Zen Yoga with Genboku Sensei, deepening my understanding of zazen and the art of letting go. This experience shifted my perspective on ego and presence.',
             location: {
-                center: [139.2, 36.1],
+                center: [137.94058671043638, 35.62064609776347],
                 zoom: 10,
                 pitch: 45,
                 bearing: 0
