@@ -105,34 +105,28 @@ map.on('load', () => {
             const chapter = config.chapters[chapterIndex];
             const targetCoords = chapter.location.center;
 
-            // fly to the chapter location
             map.flyTo({
                 center: chapter.location.center,
                 zoom: chapter.location.zoom,
                 bearing: chapter.location.bearing,
                 pitch: chapter.location.pitch,
-                duration: 3000, // 3 seconds
+                duration: 3000,
                 essential: true
             });
 
-            // move the marker
             if (config.showMarkers && marker) {
                 marker.setLngLat(targetCoords);
             }
 
-            // animate the line
-            const lastCoord = currentCoords.length ? currentCoords[currentCoords.length - 1] : targetCoords;
-
             if (!currentCoords.length) {
-                currentCoords = [targetCoords];
+                currentCoords = [config.chapters[0].location.center];
             }
 
-            const steps = 30;
-            let step = 0;
+            const lastCoord = currentCoords[currentCoords.length - 1];
+            const steps = 60;
 
             function animateLine() {
                 const interpolatedCoords = [];
-                const steps = 60; // slower, smoother
                 let step = 0;
 
                 function drawStep() {
@@ -155,15 +149,20 @@ map.on('load', () => {
                     if (step < steps) {
                         requestAnimationFrame(drawStep);
                     } else {
-                        currentCoords.push(targetCoords); // finalize
+                        currentCoords.push(targetCoords);
                     }
                 }
 
                 drawStep();
             }
-            animateLine();
+
+            map.once('moveend', () => {
+                animateLine();
+            });
+
             response.element.classList.add('active');
         })
+
 
 
         .onStepExit(response => {
