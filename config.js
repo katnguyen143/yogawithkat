@@ -16,7 +16,7 @@ var config = {
     auto: false,
     title: 'Kats Yoga Journey',
     subtitle: 'The Storytelling Template helps you create an awesome animated map story with ease.',
-    byline: 'By a I.M. Amapper',
+    byline: 'Curated by Kat Nguyen · RYT-200 Yoga Teacher',
     footer: 'Source: source citations, etc. <br> Created using <a href="https://github.com/mapbox/storytelling" target="_blank">Mapbox Storytelling</a> template.',
 
 
