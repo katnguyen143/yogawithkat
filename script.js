@@ -64,28 +64,41 @@ scroller
         progress: true
     })
     .onStepEnter(response => {
-        const chapter = config.chapters.find(chap => chap.id === response.element.id);
-        response.element.classList.add('active');
+        const chapterIndex = config.chapters.findIndex(chap => chap.id === response.element.id);
+        const targetCoords = config.chapters[chapterIndex].location.center;
 
-        // Fly to the current location
-        map.flyTo(chapter.location);
-
-        // Move the marker
-        if (config.showMarkers && marker) {
-            marker.setLngLat(chapter.location.center);
+        let currentCoords = map.getSource('journey-line')._data.geometry.coordinates;
+        if (!currentCoords.length) {
+            currentCoords = [targetCoords]; // start fresh
         }
 
-        // Animate the line segment-by-segment
-        const chapterIndex = config.chapters.findIndex(chap => chap.id === response.element.id);
-        const coords = config.chapters.slice(0, chapterIndex + 1).map(chap => chap.location.center);
+        const lastCoord = currentCoords[currentCoords.length - 1];
+        const steps = 30;
+        let step = 0;
 
-        map.getSource('journey-line').setData({
-            type: 'Feature',
-            geometry: {
-                type: 'LineString',
-                coordinates: coords
+        function animateLine() {
+            step++;
+            const interpolated = [
+                lastCoord[0] + (targetCoords[0] - lastCoord[0]) * (step / steps),
+                lastCoord[1] + (targetCoords[1] - lastCoord[1]) * (step / steps)
+            ];
+
+            const updatedCoords = [...currentCoords, interpolated];
+            map.getSource('journey-line').setData({
+                type: 'Feature',
+                geometry: {
+                    type: 'LineString',
+                    coordinates: updatedCoords
+                }
+            });
+
+            if (step < steps) {
+                requestAnimationFrame(animateLine);
+            } else {
+                currentCoords.push(targetCoords); // finalize
             }
-        });
+        }
+        animateLine();
     })
 
     .onStepExit(response => {
@@ -95,6 +108,8 @@ scroller
 const coordinates = config.chapters.map(chap => chap.location.center);
 
 map.on('load', () => {
+    const fullPath = config.chapters.map(chap => chap.location.center);
+
     map.addSource('journey-line', {
         type: 'geojson',
         data: {
@@ -117,7 +132,8 @@ map.on('load', () => {
         paint: {
             'line-color': '#88C0D0', // soft ocean blue
             'line-width': 4,
-            'line-opacity': 0.8
+            'line-opacity': 0.8,
+            'line-blur': 1
         }
     });
 });
