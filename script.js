@@ -31,16 +31,17 @@ config.chapters.forEach((record, idx) => {
         chapter.appendChild(title);
     }
 
+    if (record.date) {
+        const date = document.createElement('p');
+        date.innerText = record.date;
+        date.classList.add('date-pill'); // or 'date-sub'
+        chapter.appendChild(date);
+    }
+
     if (record.description) {
         const description = document.createElement('p');
         description.innerHTML = record.description;
         chapter.appendChild(description);
-    }
-    if (record.date) {
-        const date = document.createElement('p');
-        date.innerText = record.date;
-        date.classList.add('date-pill');
-        chapter.appendChild(date);
     }
 
     container.setAttribute('id', record.id);
