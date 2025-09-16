@@ -514,3 +514,38 @@ footer {
     height: auto;
     opacity: 0.9; /* softens the look slightly */
 }
+
+/* === Mapbox Story Map Styles === */
+/* === Mapbox Story Map Styles === */
+#map {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 0;
+}
+
+#story {
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    padding: 24px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.step {
+    margin-bottom: 48px;
+}
+
+.chapter h3 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.chapter p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
