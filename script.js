@@ -55,61 +55,12 @@ config.chapters.forEach((record, idx) => {
 
 story.appendChild(features);
 
-const scroller = scrollama();
 
-scroller
-    .setup({
-        step: '.step',
-        offset: 0.5,
-        progress: true
-    })
-    .onStepEnter(response => {
-        const chapterIndex = config.chapters.findIndex(chap => chap.id === response.element.id);
-        const targetCoords = config.chapters[chapterIndex].location.center;
-
-        let currentCoords = map.getSource('journey-line')._data.geometry.coordinates;
-        if (!currentCoords.length) {
-            currentCoords = [targetCoords]; // start fresh
-        }
-
-        const lastCoord = currentCoords[currentCoords.length - 1];
-        const steps = 30;
-        let step = 0;
-
-        function animateLine() {
-            step++;
-            const interpolated = [
-                lastCoord[0] + (targetCoords[0] - lastCoord[0]) * (step / steps),
-                lastCoord[1] + (targetCoords[1] - lastCoord[1]) * (step / steps)
-            ];
-
-            const updatedCoords = [...currentCoords, interpolated];
-            map.getSource('journey-line').setData({
-                type: 'Feature',
-                geometry: {
-                    type: 'LineString',
-                    coordinates: updatedCoords
-                }
-            });
-
-            if (step < steps) {
-                requestAnimationFrame(animateLine);
-            } else {
-                currentCoords.push(targetCoords); // finalize
-            }
-        }
-        animateLine();
-    })
-
-    .onStepExit(response => {
-        response.element.classList.remove('active');
-    });
 
 const coordinates = config.chapters.map(chap => chap.location.center);
 
 map.on('load', () => {
-    const fullPath = config.chapters.map(chap => chap.location.center);
-
+    // Add the empty line source
     map.addSource('journey-line', {
         type: 'geojson',
         data: {
@@ -121,6 +72,7 @@ map.on('load', () => {
         }
     });
 
+    // Add the line layer
     map.addLayer({
         id: 'journey-line-layer',
         type: 'line',
@@ -130,11 +82,63 @@ map.on('load', () => {
             'line-join': 'round'
         },
         paint: {
-            'line-color': '#88C0D0', // soft ocean blue
+            'line-color': '#88C0D0',
             'line-width': 4,
             'line-opacity': 0.8,
             'line-blur': 1
         }
     });
+
+    // Scroller setup
+
+    const scroller = scrollama();
+
+    scroller
+        .setup({
+            step: '.step',
+            offset: 0.5,
+            progress: true
+        })
+        .onStepEnter(response => {
+            const chapterIndex = config.chapters.findIndex(chap => chap.id === response.element.id);
+            const targetCoords = config.chapters[chapterIndex].location.center;
+
+            let currentCoords = map.getSource('journey-line')._data.geometry.coordinates;
+            if (!currentCoords.length) {
+                currentCoords = [targetCoords]; 
+            }
+
+            const lastCoord = currentCoords[currentCoords.length - 1];
+            const steps = 30;
+            let step = 0;
+
+            function animateLine() {
+                step++;
+                const interpolated = [
+                    lastCoord[0] + (targetCoords[0] - lastCoord[0]) * (step / steps),
+                    lastCoord[1] + (targetCoords[1] - lastCoord[1]) * (step / steps)
+                ];
+
+                const updatedCoords = [...currentCoords, interpolated];
+                map.getSource('journey-line').setData({
+                    type: 'Feature',
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: updatedCoords
+                    }
+                });
+
+                if (step < steps) {
+                    requestAnimationFrame(animateLine);
+                } else {
+                    currentCoords.push(targetCoords); // finalize
+                }
+            }
+            animateLine();
+        })
+
+        .onStepExit(response => {
+            response.element.classList.remove('active');
+        });
 });
 
