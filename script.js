@@ -109,7 +109,6 @@ map.on('load', () => {
                 currentCoords = [targetCoords]; 
             }
 
-            const lastCoord = currentCoords[currentCoords.length - 1];
             const steps = 30;
             let step = 0;
 
