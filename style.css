@@ -600,4 +600,25 @@ footer {
     margin-bottom: 12px;
 }
 
+@media (max-width: 768px) {
+    #story {
+        top: 10%;
+        left: 5%;
+        width: 90%;
+        max-width: none;
+        padding: 16px;
+    }
+
+    .date-pill {
+        font-size: 0.85rem;
+    }
+
+    .chapter h3 {
+        font-size: 1.2rem;
+    }
+
+    .chapter p {
+        font-size: 0.95rem;
+    }
+}
 
