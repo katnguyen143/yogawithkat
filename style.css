@@ -529,18 +529,23 @@ footer {
 }
 
 /* === Mapbox Story Map Styles === */
-/* === Mapbox Story Map Styles === */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: auto; /* allow page scroll */
+}
 
 .map-layout {
     display: flex;
     flex-direction: row;
     height: 100vh;
-    overflow: hidden;
 }
 
 #map-section {
     position: relative;
-    height: 100vh; /* fills the visible screen */
+    height: 100vh;
+    width: 100%; /* map takes full width */
     overflow: hidden;
 }
 
@@ -554,7 +559,7 @@ footer {
 }
 
 #story {
-    position: absolute;
+    position: absolute; /* overlay on top of map */
     top: 20%;
     left: 5%;
     width: 30%;
@@ -564,13 +569,13 @@ footer {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     z-index: 1;
-    overflow-y: auto;
+    /* optional scroll inside story */
     max-height: 70vh;
+    overflow-y: auto;
 }
 
-
 .step {
-    margin-bottom: 32px;
+    margin-bottom: 32px; 
     opacity: 0.3;
     transition: opacity 0.3s ease;
 }
@@ -578,7 +583,6 @@ footer {
     .step.active {
         opacity: 1;
     }
-
 
 
 .chapter h3 {
@@ -609,10 +613,6 @@ footer {
         padding: 16px;
     }
 
-    .date-pill {
-        font-size: 0.85rem;
-    }
-
     .chapter h3 {
         font-size: 1.2rem;
     }
@@ -620,5 +620,11 @@ footer {
     .chapter p {
         font-size: 0.95rem;
     }
+
+    .date-pill {
+        font-size: 0.85rem;
+    }
 }
+
+
 
