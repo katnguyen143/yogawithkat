@@ -492,6 +492,27 @@ footer {
         text-align: center;
     }
 
+#journey-intro {
+    padding: 72px 0;
+    background: var(--sand);
+}
+
+    #journey-intro h2 {
+        font-size: clamp(24px, 3.6vw, 34px);
+        color: var(--deep);
+        text-transform: lowercase;
+        margin-bottom: 12px;
+    }
+
+    #journey-intro p {
+        font-size: 1rem;
+        color: var(--muted);
+        max-width: 720px;
+        margin: 0 auto 1.6rem;
+        text-align: center;
+    }
+
+
 .link-journey {
     color: var(--teal) !important;
     font-weight: 600;
