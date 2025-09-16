@@ -536,7 +536,7 @@ footer {
 
 #story {
     position: absolute;
-    top: 10%;
+    top: 20%;
     left: 5%;
     width: 30%;
     max-width: 400px;
@@ -546,8 +546,9 @@ footer {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     z-index: 1;
     overflow-y: auto;
-    max-height: 80vh;
+    max-height: 70vh;
 }
+
 
 .step {
     margin-bottom: 32px;
