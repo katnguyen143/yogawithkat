@@ -92,6 +92,7 @@ map.on('load', () => {
     // Scroller setup
 
     const scroller = scrollama();
+    let currentCoords = [];
 
     scroller
         .setup({
@@ -102,8 +103,8 @@ map.on('load', () => {
         .onStepEnter(response => {
             const chapterIndex = config.chapters.findIndex(chap => chap.id === response.element.id);
             const targetCoords = config.chapters[chapterIndex].location.center;
+            const lastCoord = currentCoords.length ? currentCoords[currentCoords.length - 1] : targetCoords;
 
-            let currentCoords = map.getSource('journey-line')._data.geometry.coordinates;
             if (!currentCoords.length) {
                 currentCoords = [targetCoords]; 
             }
