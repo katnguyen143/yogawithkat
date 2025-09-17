@@ -23,7 +23,7 @@ var config = {
     chapters: [
         {
             id: 'berkeley-outsiders',
-            title: 'Yoga Instructor at UC Berkeley Outsiders Club',
+            title: 'Yoga Instructor — UC Berkeley Outsiders Club',
             subtitle: 'Berkeley, California',
             date: 'Jan – Dec 2024 · 1 year',
             description: 'Instructed weekly yoga sessions tailored for BIPOC communities, emphasizing accessibility, inclusion, and mindfulness. This was my first teaching experience, rooted in care and community.',
@@ -37,7 +37,7 @@ var config = {
         },
         {
             id: 'berkeley-ta',
-            title: 'Teaching Assistant at UC Berkeley\'s Yoga 1 Class',
+            title: 'Yoga 1 Teaching Assistant – UC Berkeley PE Dept',
             subtitle: 'Berkeley, California',
             date: 'Aug – Dec 2024 · 4 months',
             description: 'Supported Ashtanga-Vinyasa Level 1 classes under Toni Mar through UC Berkeley\'s Physical Education Department. Learned to build sequences, guide flows, offer hands-on adjustments, and create newsletters and a syllabus that reflected my journey as a TA.',
@@ -51,7 +51,7 @@ var config = {
         },
         {
             id: 'bali-training',
-            title: '200 Hour Yoga Teacher Training at Bali Yoga Ashram',
+            title: '200 Hour Yoga Teacher Training — Bali Yoga Ashram',
             subtitle: 'Bali, Indonesia',
             date: 'June 2025',
             description: 'Earned my 200-hour certification in Bali, studying Ashtanga and Vinyasa yoga, yogic philosophy, pranayama, anatomy, and alignment.',
@@ -65,10 +65,10 @@ var config = {
         },
         {
             id: 'tokyo-hitotsubashi',
-            title: 'Guest Yoga Teacher at Hitotsubashi University',
+            title: 'Guest Yoga Teacher — Hitotsubashi University',
             subtitle: 'Tokyo, Japan',
             date: 'July 2025',
-            description: 'Invited by Toshi Ogura Sensei to inspire university yoga students by sharing my path as a practitioner and teacher, and facilitating mindful, guided flows.',
+            description: 'Invited by Toshi Ogura Sensei to inspire university yoga students by sharing my path as a practitioner and teacher, and facilitating mindful, guided vinyasa flows and breathwork.',
             image: 'images/hitotsu_guest.jpg',
             location: {
                 center: [139.44541479438266, 35.69462892771574],
@@ -107,7 +107,7 @@ var config = {
         },
         {
             id: 'koh-phangan-nestra',
-            title: 'Yoga Instructor at Nestra Beach Shala',
+            title: 'Yoga Instructor — Nestra Beach Shala',
             subtitle: 'Koh Phangan, Thailand',
             date: 'Aug - Sept 2025 • 2 months',
             description: 'Taught 3–4 classes per week including yang-to-yin sunset flows, handstand & inversions, Acroyoga workshops, and adaptable donation-based classes.',
@@ -121,7 +121,7 @@ var config = {
         },
         {
             id: 'acro_tipi',
-            title: 'Acroyoga Instructor at The Tipi',
+            title: 'Acroyoga Instructor — The Tipi',
             subtitle: 'Koh Phangan, Thailand',
             date: 'Aug - Sept 2025 • 2 months',
             description: 'Co-taught 2 All-Levels Acroyoga classes per week, guiding students through warmups, breaking down the foundations of Acroyoga, and building trust and communication.',
