@@ -1,5 +1,6 @@
 ﻿mapboxgl.accessToken = config.accessToken;
 
+// --- Initialize Map ---
 const map = new mapboxgl.Map({
     container: 'map',
     style: config.style,
@@ -10,109 +11,60 @@ const map = new mapboxgl.Map({
     interactive: false
 });
 
-// Build story steps
-const story = document.getElementById('story');
-const features = document.createElement('div');
-features.id = 'features';
-
-config.chapters.forEach((record, idx) => {
-    const container = document.createElement('div');
-    container.classList.add('step');
-    container.id = record.id;
-    if (idx === 0) container.classList.add('active');
-
-    const chapter = document.createElement('div');
-    chapter.classList.add(config.theme);
-
-    if (record.title) {
-        const h = document.createElement('h3');
-        h.innerText = record.title;
-        chapter.appendChild(h);
-    }
-    if (record.date) {
-        const p = document.createElement('p');
-        p.innerText = record.date;
-        p.classList.add('date-pill');
-        chapter.appendChild(p);
-    }
-    if (record.description) {
-        const p = document.createElement('p');
-        p.innerHTML = record.description;
-        chapter.appendChild(p);
-    }
-
-    container.appendChild(chapter);
-    features.appendChild(container);
-});
-
-story.appendChild(features);
-
 map.on('load', () => {
 
-    // Create a pulsing dot as a canvas source
+    // --- Create pulsing dot ---
     const size = 200;
-
     const pulsingDot = {
         width: size,
         height: size,
         data: new Uint8Array(size * size * 4),
-
         onAdd: function () {
             const canvas = document.createElement('canvas');
             canvas.width = this.width;
             canvas.height = this.height;
             this.context = canvas.getContext('2d');
         },
-
         render: function () {
             const duration = 1000;
             const t = (performance.now() % duration) / duration;
-
             const radius = (size / 2) * 0.3;
             const outerRadius = (size / 2) * 0.7 * t + radius;
-            const context = this.context;
+            const ctx = this.context;
 
-            // clear canvas
-            context.clearRect(0, 0, this.width, this.height);
+            ctx.clearRect(0, 0, this.width, this.height);
 
-            // draw outer circle
-            context.beginPath();
-            context.arc(size / 2, size / 2, outerRadius, 0, Math.PI * 2);
-            context.fillStyle = `rgba(0, 128, 128, ${1 - t})`; // teal with fading
-            context.fill();
+            // outer circle
+            ctx.beginPath();
+            ctx.arc(size / 2, size / 2, outerRadius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0,128,128,${1 - t})`;
+            ctx.fill();
 
-            // draw inner circle
-            context.beginPath();
-            context.arc(size / 2, size / 2, radius, 0, Math.PI * 2);
-            context.fillStyle = 'teal';
-            context.strokeStyle = 'white';
-            context.lineWidth = 2 + 2 * t;
-            context.fill();
-            context.stroke();
+            // inner circle
+            ctx.beginPath();
+            ctx.arc(size / 2, size / 2, radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'teal';
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 2 + 2 * t;
+            ctx.fill();
+            ctx.stroke();
 
-            // update image
-            this.data = context.getImageData(0, 0, this.width, this.height).data;
-
-            // keep repainting
+            this.data = ctx.getImageData(0, 0, this.width, this.height).data;
             map.triggerRepaint();
-
             return true;
         }
     };
 
     map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
 
-    // Add source & layer for initial position
+    // --- Add pulsing dot source & layer ---
     map.addSource('pulsing-point', {
         type: 'geojson',
         data: {
             type: 'FeatureCollection',
             features: [{
                 type: 'Feature',
-                geometry: {
-                    type: 'Point',
-                    coordinates: config.chapters[0].location.center
-                }
+                geometry: { type: 'Point', coordinates: config.chapters[0].location.center }
             }]
         }
     });
@@ -124,13 +76,61 @@ map.on('load', () => {
         layout: { 'icon-image': 'pulsing-dot' }
     });
 
-    // Scrollama logic
+    // --- Build Story Panel ---
+    const story = document.getElementById('story');
+    story.innerHTML = '';
+
+    config.chapters.forEach((record, idx) => {
+        const step = document.createElement('div');
+        step.classList.add('step');
+        step.id = record.id;
+        if (idx === 0) step.classList.add('active');
+
+        const chapter = document.createElement('div');
+        chapter.classList.add(config.theme);
+
+        if (record.title) {
+            const h = document.createElement('h3');
+            h.innerText = record.title;
+            chapter.appendChild(h);
+        }
+        if (record.date) {
+            const p = document.createElement('p');
+            p.innerText = record.date;
+            p.classList.add('date-pill');
+            chapter.appendChild(p);
+        }
+        if (record.description) {
+            const p = document.createElement('p');
+            p.innerHTML = record.description;
+            chapter.appendChild(p);
+        }
+        if (record.image) {
+            const img = document.createElement('img');
+            img.src = record.image;
+            img.alt = record.title || '';
+            img.style.width = '100%';
+            img.style.borderRadius = '8px';
+            img.style.marginTop = '0.5rem';
+            chapter.appendChild(img);
+        }
+
+        step.appendChild(chapter);
+        story.appendChild(step);
+    });
+
+    // --- Scrollama Setup ---
     const scroller = scrollama();
 
-    scroller.setup({ step: '.step', offset: 0.5 })
+    scroller.setup({
+        step: '.step',
+        offset: 0.5,
+        container: null // default window scroll
+    })
         .onStepEnter(response => {
             const idx = config.chapters.findIndex(c => c.id === response.element.id);
             if (idx === -1) return;
+
             const loc = config.chapters[idx].location;
 
             // Move pulsing dot
@@ -142,7 +142,7 @@ map.on('load', () => {
                 }]
             });
 
-            // Fly to location
+            // Fly camera
             map.flyTo({
                 center: loc.center,
                 zoom: loc.zoom,
@@ -154,5 +154,9 @@ map.on('load', () => {
 
             response.element.classList.add('active');
         })
-        .onStepExit(response => response.element.classList.remove('active'));
+        .onStepExit(response => {
+            response.element.classList.remove('active');
+        });
+
+    window.addEventListener('resize', scroller.resize);
 });

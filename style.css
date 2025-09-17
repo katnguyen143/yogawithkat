@@ -538,15 +538,13 @@ html, body {
 
 .map-layout {
     display: flex;
-    flex-direction: row;
     height: 100vh;
+    overflow: hidden;
 }
 
 #map-section {
+    flex: 1;
     position: relative;
-    height: 100vh;
-    width: 100%; /* map takes full width */
-    overflow: hidden;
 }
 
 #map {
@@ -555,24 +553,20 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
+}
+
+#triggers .step {
+    height: 100vh; /* each trigger covers a screen height */
 }
 
 #story {
-    position: absolute; /* overlay on top of map */
-    top: 20%;
-    left: 5%;
-    width: 30%;
-    max-width: 400px;
-    background: rgba(255, 255, 255, 0.85);
+    flex: 0 0 400px; /* fixed width for story panel */
+    overflow-y: auto; /* scrollable text */
     padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.9);
     z-index: 1;
-    /* optional scroll inside story */
-    max-height: 70vh;
-    overflow-y: auto;
 }
+
 
 .step {
     margin-bottom: 32px; 
@@ -584,7 +578,6 @@ html, body {
         opacity: 1;
     }
 
-
 .chapter h3 {
     font-size: 1.4rem;
     margin-bottom: 8px;
@@ -594,6 +587,12 @@ html, body {
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 24px;
+}
+
+.chapter img {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 0.5rem;
 }
 
 .date-pill {
@@ -646,4 +645,11 @@ html, body {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+
+#content img {
+    width: 100%;
+    border-radius: 8px;
+    margin: 12px 0;
 }
