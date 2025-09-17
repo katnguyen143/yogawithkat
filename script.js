@@ -76,7 +76,6 @@ map.on('load', () => {
         layout: { 'icon-image': 'pulsing-dot' }
     });
 
-    // --- Build Story Panel ---
     const story = document.getElementById('story');
     story.innerHTML = '';
 
@@ -89,22 +88,37 @@ map.on('load', () => {
         const chapter = document.createElement('div');
         chapter.classList.add(config.theme);
 
+        // Title
         if (record.title) {
             const h = document.createElement('h3');
             h.innerText = record.title;
             chapter.appendChild(h);
         }
+
+        // 🔹 Subtitle (new)
+        if (record.subtitle) {
+            const sub = document.createElement('h4'); // or 'p' with a class
+            sub.innerText = record.subtitle;
+            sub.classList.add('subtitle'); // optional for styling in CSS
+            chapter.appendChild(sub);
+        }
+
+        // Date
         if (record.date) {
             const p = document.createElement('p');
             p.innerText = record.date;
             p.classList.add('date-pill');
             chapter.appendChild(p);
         }
+
+        // Description
         if (record.description) {
             const p = document.createElement('p');
             p.innerHTML = record.description;
             chapter.appendChild(p);
         }
+
+        // Image
         if (record.image) {
             const img = document.createElement('img');
             img.src = record.image;

@@ -578,6 +578,26 @@ html, body {
         opacity: 1;
     }
 
+    .step h3 {
+        margin-top: 0; /* remove the big top gap */
+        margin-bottom: 0.2rem; /* tiny space before subtitle */
+        font-size: 1.4rem; /* optional: adjust size */
+    }
+
+.subtitle {
+    margin-top: 0; /* no extra top margin */
+    margin-bottom: 0.5rem; /* small gap before date */
+    font-size: 1rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.date-pill {
+    margin-top: 0; /* keep date close */
+    margin-bottom: 0.5rem; /* gap before description */
+}
+
+
 .chapter h3 {
     font-size: 1.4rem;
     margin-bottom: 8px;
@@ -653,3 +673,5 @@ html, body {
     border-radius: 8px;
     margin: 12px 0;
 }
+
+
