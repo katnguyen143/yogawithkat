@@ -724,33 +724,36 @@ html, body {
 
 @media (max-width: 768px) {
     .map-layout {
+        display: flex;
         flex-direction: column;
-        height: 100vh; /* full viewport */
+        height: 100vh;
     }
 
     #map-section {
         position: relative;
-        top: -10vh;
         width: 100%;
-        height: 60vh; 
+        height: 60vh;
         overflow: hidden; 
     }
 
     #map {
-        position: relative; /* keep map in normal flow */
+        position: relative;
         width: 100%;
         height: 100%;
     }
 
     #story {
-        max-height: 60vh; /* remaining space for scrollable text */
-        overflow-y: auto;
+        flex: none;
+        width: 100%;
+        max-height: 40vh; 
+        overflow-y: auto; 
         padding: 16px;
-        background: rgba(255,255,255,0.95);
+        background: rgba(255, 255, 255, 0.95);
+        box-sizing: border-box;
     }
 
     #triggers .step {
-        height: auto;
+        height: auto; /* text decides height */
         margin-bottom: 24px;
     }
 
