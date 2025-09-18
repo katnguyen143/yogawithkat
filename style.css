@@ -562,6 +562,21 @@ footer {
     }
 }
 
+@media (max-width: 768px) {
+    #map {
+        position: relative;
+        width: 100%;
+        height: 50vh; /* show half screen of map */
+    }
+
+    #story {
+        position: relative;
+        width: 100%;
+        background: #fff;
+    }
+}
+
+
 .slideshow {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border-radius: var(--radius);
