@@ -724,38 +724,40 @@ html, body {
 
 @media (max-width: 768px) {
     .map-layout {
-        flex-direction: column; /* stack vertically */
-        height: auto; /* content defines height */
-        position: relative; /* ensure proper stacking */
+        flex-direction: column;
+        height: 100vh; /* take full viewport height */
     }
 
     #map-section {
-        position: relative;
+        position: fixed; /* map stays in viewport */
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 50vh; /* or 60vh if you want bigger map */
-        min-height: 300px; /* ensure it shows on small screens */
+        height: 50vh; /* map occupies top half of screen */
+        z-index: 0;
     }
 
     #map {
-        position: relative; /* switch from absolute to relative on mobile */
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
-        z-index: 0;
     }
 
     #story {
         position: relative;
-        flex: none;
+        margin-top: 50vh; /* push text below the map */
         width: 100%;
-        max-width: 100%;
         padding: 16px;
         background: rgba(255,255,255,0.95);
-        z-index: 1; /* text sits on top */
-        margin-top: -4px; /* optional: slightly overlap map if you like */
+        z-index: 1;
+        overflow-y: auto; /* allow scrolling */
+        max-height: 50vh; /* optional: limit height */
     }
 
     #triggers .step {
-        height: auto; /* let text dictate height */
+        height: auto; /* text dictates height */
         margin-bottom: 24px;
     }
 
