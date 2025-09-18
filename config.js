@@ -125,7 +125,7 @@ var config = {
             subtitle: 'Koh Phangan, Thailand',
             date: 'Aug - Sept 2025 • 2 months',
             description: 'Co-taught 2 All-Levels Acroyoga classes per week, guiding students through warmups, breaking down the foundations of Acroyoga, and building trust and communication.',
-            image: 'images/tipi_croc2.JPG',
+            image: 'images/tipi_croc2.jpg',
             location: {
                 center: [99.9789026935661, 9.75161635001131],
                 zoom: 13,
