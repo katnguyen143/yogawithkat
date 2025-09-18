@@ -349,6 +349,52 @@ h2 {
         font-style: normal
     }
 
+.rates-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+    .rates-box h3 {
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.25rem;
+    }
+
+.rate-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+    .rate-row:last-child {
+        border-bottom: none;
+    }
+
+    .rate-row span {
+        display: inline-block;
+    }
+
+.price {
+    font-weight: 600;
+    color: #333;
+    text-align: right;
+}
+
+.student-note {
+    font-size: 0.85rem;
+    color: #555;
+    margin-top: 0.5rem;
+}
+
+
+
 /* Gallery */
 .gallery {
     display: grid;
