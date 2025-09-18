@@ -69,7 +69,7 @@ var config = {
             subtitle: 'Tokyo, Japan',
             date: 'July 2025',
             description: 'Invited by Toshi Ogura Sensei to inspire university yoga students by sharing my path as a practitioner and teacher, and facilitating mindful, guided vinyasa flows and breathwork.',
-            image: 'images/hitotsu_guest.jpg',
+            image: 'images/hitotsu_guest2.jpg',
             location: {
                 center: [139.44541479438266, 35.69462892771574],
                 zoom: 12,
