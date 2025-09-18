@@ -110,7 +110,7 @@ var config = {
             title: 'Yoga Instructor — Nestra Beach Shala',
             subtitle: 'Koh Phangan, Thailand',
             date: 'Aug - Sept 2025 • 2 months',
-            description: 'Taught 3–4 classes per week including yang-to-yin sunset flows, handstand & inversions, Acroyoga workshops, and adaptable donation-based classes.',
+            description: 'Taught 3–4 classes per week including yang-to-yin sunset flows, handstand & inversions, Acroyoga workshops, and vinyasa donation-based classes.',
             image: 'images/nestra.JPG',
             location: {
                 center: [100.035472, 9.694583],
