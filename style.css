@@ -562,20 +562,6 @@ footer {
     }
 }
 
-@media (max-width: 768px) {
-    #map {
-        position: relative;
-        width: 100%;
-        height: 50vh; /* show half screen of map */
-    }
-
-    #story {
-        position: relative;
-        width: 100%;
-        background: #fff;
-    }
-}
-
 
 .slideshow {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -737,12 +723,41 @@ html, body {
 }
 
 @media (max-width: 768px) {
+    .map-layout {
+        flex-direction: column; /* stack map and text vertically */
+        height: auto; /* let content define height */
+    }
+
+    #map-section {
+        position: relative;
+        height: 50vh; /* map takes half the screen on mobile */
+        width: 100%;
+    }
+
+    #map {
+        position: absolute; /* keep map filling its container */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0; /* behind text */
+    }
+
     #story {
-        top: 10%;
-        left: 5%;
-        width: 90%;
-        max-width: none;
+        position: relative;
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+        top: auto;
+        left: auto;
         padding: 16px;
+        background: rgba(255,255,255,0.95);
+        z-index: 1; /* text on top */
+    }
+
+    #triggers .step {
+        height: auto; /* let text size determine height */
+        margin-bottom: 24px;
     }
 
     .chapter h3 {
@@ -757,6 +772,7 @@ html, body {
         font-size: 0.85rem;
     }
 }
+
 
 .pulsing-marker {
     animation: pulse 2s infinite;
