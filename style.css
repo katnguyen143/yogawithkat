@@ -731,7 +731,8 @@ html, body {
     #map-section {
         position: relative; /* keep it in flow */
         width: 100%;
-        height: 70vh; /* map takes top half */
+        height: 60vh;
+        margin-top: 10vh;
     }
 
     #map {

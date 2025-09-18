@@ -12,7 +12,6 @@ const map = new mapboxgl.Map({
 });
 
 map.on('load', () => {
-
     // --- Create pulsing dot ---
     const size = 200;
     const pulsingDot = {
@@ -88,22 +87,22 @@ map.on('load', () => {
         const chapter = document.createElement('div');
         chapter.classList.add(config.theme);
 
-        // Title
+        // title
         if (record.title) {
             const h = document.createElement('h3');
             h.innerText = record.title;
             chapter.appendChild(h);
         }
 
-        // 🔹 Subtitle (new)
+        // subtitle
         if (record.subtitle) {
             const sub = document.createElement('h4'); // or 'p' with a class
             sub.innerText = record.subtitle;
-            sub.classList.add('subtitle'); // optional for styling in CSS
+            sub.classList.add('subtitle');
             chapter.appendChild(sub);
         }
 
-        // Date
+        // date
         if (record.date) {
             const p = document.createElement('p');
             p.innerText = record.date;
@@ -111,14 +110,14 @@ map.on('load', () => {
             chapter.appendChild(p);
         }
 
-        // Description
+        // description
         if (record.description) {
             const p = document.createElement('p');
             p.innerHTML = record.description;
             chapter.appendChild(p);
         }
 
-        // Image
+        // image
         if (record.image) {
             const img = document.createElement('img');
             img.src = record.image;
