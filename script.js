@@ -137,7 +137,7 @@ map.on('load', () => {
 
     scroller.setup({
         step: '.step',
-        offset: 0.5,
+        offset: 0.25,
         container: null // default window scroll
     })
         .onStepEnter(response => {
