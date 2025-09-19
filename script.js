@@ -137,8 +137,8 @@ map.on('load', () => {
 
     scroller.setup({
         step: '.step',
-        offset: 0.25,
-        container: null // default window scroll
+        offset: 0.15,
+        container: storyEl // default window scroll
     })
         .onStepEnter(response => {
             const idx = config.chapters.findIndex(c => c.id === response.element.id);
