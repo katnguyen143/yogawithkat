@@ -730,7 +730,7 @@ html, body {
     }
 
     #map-section {
-        flex: 0 0 60%; 
+        flex: 0 0 50%; 
         position: relative;
         width: 100%;
         overflow: hidden;
