@@ -137,7 +137,7 @@ map.on('load', () => {
 
     scroller.setup({
         step: '.step',
-        offset: 0.15,
+        offset: 0.35,
         container: document.getElementById('story')
     })
         .onStepEnter(response => {
