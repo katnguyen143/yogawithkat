@@ -75,6 +75,7 @@ map.on('load', () => {
         layout: { 'icon-image': 'pulsing-dot' }
     });
 
+    // --- Build Story DOM ---
     const story = document.getElementById('story');
     story.innerHTML = '';
 
@@ -87,22 +88,19 @@ map.on('load', () => {
         const chapter = document.createElement('div');
         chapter.classList.add(config.theme);
 
-        // title
         if (record.title) {
             const h = document.createElement('h3');
             h.innerText = record.title;
             chapter.appendChild(h);
         }
 
-        // subtitle
         if (record.subtitle) {
-            const sub = document.createElement('h4'); // or 'p' with a class
+            const sub = document.createElement('h4');
             sub.innerText = record.subtitle;
             sub.classList.add('subtitle');
             chapter.appendChild(sub);
         }
 
-        // date
         if (record.date) {
             const p = document.createElement('p');
             p.innerText = record.date;
@@ -110,14 +108,12 @@ map.on('load', () => {
             chapter.appendChild(p);
         }
 
-        // description
         if (record.description) {
             const p = document.createElement('p');
             p.innerHTML = record.description;
             chapter.appendChild(p);
         }
 
-        // image
         if (record.image) {
             const img = document.createElement('img');
             img.src = record.image;
@@ -135,41 +131,55 @@ map.on('load', () => {
     // --- Scrollama Setup ---
     const scroller = scrollama();
 
-    scroller.setup({
-        step: '.step',
-        offset: 0.4,
-        container: document.getElementById('story')
-    })
-        .onStepEnter(response => {
-            const idx = config.chapters.findIndex(c => c.id === response.element.id);
-            if (idx === -1) return;
+    function initScroller() {
+        try { scroller.destroy(); } catch (e) { }
 
-            const loc = config.chapters[idx].location;
+        scroller
+            .setup({
+                step: '.step',
+                offset: 0.25,         // triggers when step crosses 25% viewport height
+                container: '#story',
+                debug: false          // set to true to see trigger line
+            })
+            .onStepEnter(resp => {
+                const id = resp.element.id;
+                const idx = config.chapters.findIndex(c => c.id === id);
+                if (idx === -1) return;
+                const loc = config.chapters[idx].location;
 
-            // Move pulsing dot
-            map.getSource('pulsing-point').setData({
-                type: 'FeatureCollection',
-                features: [{
-                    type: 'Feature',
-                    geometry: { type: 'Point', coordinates: loc.center }
-                }]
+                // update pulsing dot
+                map.getSource('pulsing-point').setData({
+                    type: 'FeatureCollection',
+                    features: [{
+                        type: 'Feature',
+                        geometry: { type: 'Point', coordinates: loc.center }
+                    }]
+                });
+
+                // fly to new location
+                map.flyTo({
+                    center: loc.center,
+                    zoom: loc.zoom,
+                    bearing: loc.bearing,
+                    pitch: loc.pitch,
+                    duration: 900,
+                    essential: true
+                });
+
+                // update active class
+                document.querySelectorAll('.step.active').forEach(s => s.classList.remove('active'));
+                resp.element.classList.add('active');
+            })
+            .onStepExit(resp => {
+                if (resp.direction === 'up') {
+                    resp.element.classList.remove('active');
+                }
             });
 
-            // Fly camera
-            map.flyTo({
-                center: loc.center,
-                zoom: loc.zoom,
-                bearing: loc.bearing,
-                pitch: loc.pitch,
-                duration: 2000,
-                essential: true
-            });
+        scroller.resize();
+    }
 
-            response.element.classList.add('active');
-        })
-        .onStepExit(response => {
-            response.element.classList.remove('active');
-        });
-
-    window.addEventListener('resize', scroller.resize);
+    initScroller();
+    window.addEventListener('resize', () => setTimeout(() => initScroller(), 150));
+    window.addEventListener('orientationchange', () => setTimeout(() => initScroller(), 200));
 });

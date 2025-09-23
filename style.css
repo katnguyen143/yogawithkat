@@ -754,9 +754,10 @@ html, body {
 
 
     #triggers .step {
-        min-height: 60vh;
-        margin-bottom: 1rem;
+        min-height: 70vh;
+        margin-bottom: 2rem;
     }
+
 
     .chapter h3 {
         font-size: 1.2rem;
