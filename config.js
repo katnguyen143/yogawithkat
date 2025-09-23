@@ -26,7 +26,7 @@ var config = {
             title: 'Yoga Instructor — UC Berkeley Outsiders Club',
             subtitle: 'Berkeley, California',
             date: 'Jan – Dec 2024 · 1 year',
-            description: 'Instructed weekly yoga sessions tailored for BIPOC communities, emphasizing accessibility, inclusion, and mindfulness. This was my first teaching experience, rooted in care and community.',
+            description: 'Instructed weekly yoga sessions tailored for BIPOC communities, emphasizing accessibility, inclusion, and mindfulness.',
             image: 'images/outdoor_yoga.JPG',
             location: {
                 center: [-122.259, 37.871],
