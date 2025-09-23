@@ -134,13 +134,17 @@ map.on('load', () => {
     function initScroller() {
         try { scroller.destroy(); } catch (e) { }
 
-        scroller
-            .setup({
-                step: '.step',
-                offset: 0.25,         // triggers when step crosses 25% viewport height
-                container: '#story',
-                debug: false          // set to true to see trigger line
-            })
+        // decide offset dynamically
+        const isMobile = window.innerWidth < 768;
+        const OFFSET = isMobile ? 0.05 : 0.25; // 5% from top on mobile, 25% on desktop
+
+        scroller.setup({
+            step: '.step',
+            offset: OFFSET,
+            container: '#story',
+            debug: false
+        })
+
             .onStepEnter(resp => {
                 const id = resp.element.id;
                 const idx = config.chapters.findIndex(c => c.id === id);

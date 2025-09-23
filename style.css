@@ -743,7 +743,7 @@ html, body {
     }
 
     #story {
-        flex: 0 0 40%; 
+        flex: 0 0 45%; 
         overflow-y: auto; 
         width: 100%;
         padding: 16px;
