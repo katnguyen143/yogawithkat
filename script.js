@@ -166,7 +166,7 @@ map.on('load', () => {
                     zoom: loc.zoom,
                     bearing: loc.bearing,
                     pitch: loc.pitch,
-                    duration: 900,
+                    duration: 1500,
                     essential: true
                 });
 
