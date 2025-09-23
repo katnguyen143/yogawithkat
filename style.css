@@ -754,7 +754,7 @@ html, body {
 
 
     #triggers .step {
-        height: auto; /* text decides height */
+        min-height: 60vh;
         margin-bottom: 24px;
     }
 
