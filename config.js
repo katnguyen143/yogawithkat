@@ -39,7 +39,7 @@ var config = {
             id: 'berkeley-ta',
             title: 'Yoga 1 Teaching Assistant – UC Berkeley PE Dept',
             subtitle: 'Berkeley, California',
-            date: 'Aug – Dec 2024 · 4 months',
+            date: 'Aug – Dec 2024 · 5 months',
             description: 'Supported Ashtanga-Vinyasa Level 1 classes under Toni Mar through UC Berkeley\'s Physical Education Department. Learned to build sequences, guide flows, offer hands-on adjustments, and create newsletters and a syllabus that reflected my journey as a TA.',
             image: 'images/toni.JPG',
             location: {
