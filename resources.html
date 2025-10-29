@@ -72,7 +72,11 @@
                 <span>yoga & acroyoga with kat ♡</span>
             </a>
 
-            <nav class="menu" aria-label="Primary">
+            <button class="mobile-toggle" aria-label="Toggle menu" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav class="menu" id="mobileMenu" aria-label="Primary">
                 <a href="journey.html" class="link-journey">my journey</a>
                 <a href="index.html#offerings">classes</a>
                 <a href="index.html#schedule">schedule</a>
@@ -81,13 +85,6 @@
                 <a class="btn btn-outline" href="index.html#booking">book a class</a>
                 <a href="resources.html" class="link-journey">resources</a>
             </nav>
-
-            <button class="mobile-toggle btn btn-outline" aria-label="Open menu" onclick="
-        const m=document.querySelector('.menu');
-        m.style.display = m.style.display==='flex' ? 'none' : 'flex';
-      ">
-                Menu
-            </button>
         </div>
     </header>
 
@@ -98,11 +95,9 @@
                 <span class="pill">wondering where to begin?</span>
                 <h2>yoga resources ♡</h2>
                 <p class="lead">
-                    I remember the feeling of taking my first class — feeling inspired, then coming home and getting
-                    totally overwhelmed by the sea of YouTube channels and styles of yoga. It was hard to know what was
-                    right for my body, my energy, or my experience level.
+                    When I first started yoga, I felt both inspired and overwhelmed — there were so many styles, teachers, and videos that I didn’t know what to choose. I just wanted something that felt right for me.
                     <br /><br />
-                    So I’ve gathered a few beginner-friendly flows and tips to help you get started with your yoga journey. ♡
+                    If you’ve ever felt the same, I’ve gathered a few simple, beginner-friendly resources to help you begin your practice with confidence and curiosity.
                 </p>
 
                 <!-- Sun Salutations -->
@@ -145,7 +140,7 @@
 
                 <!-- Gentle Full-Body Flows -->
                 <div class="resource-block">
-                    <h3>gentle full-body flows</h3>
+                    <h3>full-body flows</h3>
                     <p>
                         These gentle flows build comfort, body awareness, and breath connection — perfect for easing into movement.
                     </p>
@@ -158,11 +153,11 @@
                             </div>
                         </a>
 
-                        <a href="https://www.youtube.com/watch?v=GdV8zbmCRaU" target="_blank" rel="noopener" class="resource-card">
-                            <img src="https://img.youtube.com/vi/GdV8zbmCRaU/hqdefault.jpg" alt="Flexibility, Strength & Balance thumbnail" />
+                        <a href="https://www.youtube.com/watch?v=lDbJdJWX82M" target="_blank" rel="noopener" class="resource-card">
+                            <img src="https://img.youtube.com/vi/lDbJdJWX82M/hqdefault.jpg" alt="Flexibility, Strength & Balance thumbnail" />
                             <div class="resource-card-content">
-                                <h4>Flexibility, Strength & Balance</h4>
-                                <p>A calm yet empowering practice to find equilibrium in your flow.</p>
+                                <h4>45-minute Power Yoga</h4>
+                                <p>An intermediate full-body yoga flow, great for building strength.</p>
                             </div>
                         </a>
                     </div>
@@ -194,9 +189,9 @@
                     </div>
                 </div>
 
-                <!-- 🌱 Kat’s Tips -->
+                <!-- ♡ Kat’s Tips -->
                 <div class="tips-card">
-                    <h3>🌱 kat's tips for new yogis</h3>
+                    <h3>♡ kat's tips for new yogis</h3>
                     <ul>
                         <li><strong>Start slow.</strong> Even 10 minutes or 3 rounds of Sun Salutations can go a long way.</li>
                         <li><strong>Focus on the breath</strong> before the movements.</li>
@@ -265,5 +260,12 @@
     </footer>
 
     <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+    <script>function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            const icon = document.querySelector('.mobile-toggle i');
+            menu.classList.toggle('open');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark')
+        }</script>
 </body>
 </html>

@@ -536,29 +536,73 @@ footer {
     }
 }
 
-@media (max-width: 640px) {
-    .menu {
-        display: none
+@media (max-width: 768px) {
+    /* --- Mobile Nav --- */
+    .mobile-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--deep);
+        font-size: 1.6rem;
+        cursor: pointer;
     }
 
-    .mobile-toggle {
-        display: inline-flex
+    .menu {
+        position: absolute;
+        top: 64px; /* below header */
+        right: 0;
+        left: 0;
+        background: var(--sand);
+        border-top: 1px solid rgba(0,0,0,0.05);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.2rem 1.5rem;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        z-index: 999;
+    }
+
+        .menu.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .menu a {
+            display: block;
+            width: 100%;
+            font-weight: 600;
+            color: var(--deep);
+            text-align: left;
+            padding: 0.5rem 0;
+        }
+
+    .btn.btn-outline {
+        align-self: flex-start;
+        text-align: left;
+        margin-top: 0.5rem;
+        width: auto;
+        padding: 10px 16px;
     }
 
     .grid-3, .schedule {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 
     .gallery {
-        grid-template-columns: 1fr 1fr
+        grid-template-columns: 1fr 1fr;
     }
 
     .footgrid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 
     .hero {
-        min-height: 78vh
+        min-height: 78vh;
     }
 }
 
@@ -810,18 +854,19 @@ html, body {
 }
 
     #resources h2 {
-        text-align: center;
+        text-align: left;
         font-size: clamp(26px, 3.4vw, 36px);
         text-transform: lowercase;
         margin-bottom: 10px;
     }
 
     #resources .lead {
-        text-align: center;
-        max-width: 720px;
-        margin: 0 auto 60px;
+        text-align: left;
+        margin-left: 0;
+        margin-right: auto;
         color: var(--muted);
     }
+
 
 .resource-block {
     margin-bottom: 64px;
@@ -835,7 +880,6 @@ html, body {
 
     .resource-block p {
         color: var(--muted);
-        max-width: 720px;
         margin-bottom: 24px;
     }
 
@@ -919,3 +963,47 @@ html, body {
         .cta-note a:hover {
             opacity: 0.8;
         }
+
+/* === YouTube thumbnail play overlay === */
+.resource-card {
+    position: relative;
+    overflow: hidden;
+}
+
+    .resource-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0);
+        transition: background 0.25s ease;
+        z-index: 1;
+    }
+
+    .resource-card::after {
+        content: "\25B6"; /* ▶ */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 48px;
+        color: rgba(255,255,255,0.9);
+        background: rgba(255,255,255,0.25);
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        display: grid;
+        place-items: center;
+        opacity: 0;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .resource-card:hover::before {
+        background: rgba(0,0,0,0.25);
+    }
+
+    .resource-card:hover::after {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.05);
+    }

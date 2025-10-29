@@ -26,27 +26,24 @@
     <!-- Header -->
     <header>
         <div class="container nav">
-            <a class="brand" href="#top" aria-label="Home">
-                <img src="images/kat-logo-t.png" alt="Kat Yoga logo" class="logo">
+            <a class="brand" href="index.html" aria-label="Home">
+                <img src="images/kat-logo-t.png" alt="Kat Yoga logo" class="logo" />
                 <span>yoga & acroyoga with kat ♡</span>
             </a>
 
-            <nav class="menu" aria-label="Primary">
+            <button class="mobile-toggle" aria-label="Toggle menu" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav class="menu" id="mobileMenu" aria-label="Primary">
                 <a href="journey.html" class="link-journey">my journey</a>
-                <a href="#offerings">classes</a>
-                <a href="#schedule">schedule</a>
-                <a href="#gallery">gallery</a>
-                <a href="#contact">contact</a>
-                <a class="btn btn-outline" href="#booking">book a class</a>
+                <a href="index.html#offerings">classes</a>
+                <a href="index.html#schedule">schedule</a>
+                <a href="index.html#gallery">gallery</a>
+                <a href="index.html#contact">contact</a>
+                <a class="btn btn-outline" href="index.html#booking">book a class</a>
                 <a href="resources.html" class="link-journey">resources</a>
             </nav>
-
-            <button class="mobile-toggle btn btn-outline" aria-label="Open menu" onclick="
-        const m=document.querySelector('.menu');
-        m.style.display = m.style.display==='flex' ? 'none' : 'flex';
-      ">
-                Menu
-            </button>
         </div>
     </header>
 
@@ -362,8 +359,7 @@
         }
     </script>
 
-    <script>
-        document.addEventListener('click', (e) => {
+    <script>document.addEventListener('click', (e) => {
             const a = e.target.closest('a[href^="#"]');
             if (!a) return;
             const id = a.getAttribute('href');
@@ -375,5 +371,13 @@
 
         // Current year
         document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+    <script>function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            const icon = document.querySelector('.mobile-toggle i');
+            menu.classList.toggle('open');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark'); // toggles to "X" when open
+        }</script>
 </body>
 </html>

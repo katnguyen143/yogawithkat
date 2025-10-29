@@ -31,8 +31,12 @@
                 <span>yoga & acroyoga with kat ♡</span>
             </a>
 
-            <nav class="menu" aria-label="Primary">
-                <a href="#journey.html" class="link-journey">my journey</a>
+            <button class="mobile-toggle" aria-label="Toggle menu" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav class="menu" id="mobileMenu" aria-label="Primary">
+                <a href="journey.html" class="link-journey">my journey</a>
                 <a href="index.html#offerings">classes</a>
                 <a href="index.html#schedule">schedule</a>
                 <a href="index.html#gallery">gallery</a>
@@ -40,13 +44,6 @@
                 <a class="btn btn-outline" href="index.html#booking">book a class</a>
                 <a href="resources.html" class="link-journey">resources</a>
             </nav>
-
-            <button class="mobile-toggle btn btn-outline" aria-label="Open menu" onclick="
-        const m=document.querySelector('.menu');
-        m.style.display = m.style.display==='flex' ? 'none' : 'flex';
-      ">
-                Menu
-            </button>
         </div>
     </header>
 
@@ -127,7 +124,6 @@
                         <img src="images/RYT200.png" alt="RYT-200 Certification Badge" class="badge" />
                     </a>
                 </div>
-
             </div>
         </div>
     </footer>
@@ -135,5 +131,12 @@
     <script src="config.js"></script>
     <script src="script.js"></script>
 
+    <script>function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            const icon = document.querySelector('.mobile-toggle i');
+            menu.classList.toggle('open');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark')
+        }</script>
 </body>
 </html>
