@@ -671,8 +671,11 @@ footer {
     height: auto;
     opacity: 0.9; /* softens the look slightly */
 }
+/* =========================================================
+   🗺️ MAPBOX STORY MAP STYLES
+   ========================================================= */
 
-/* === Mapbox Story Map Styles === */
+/* ---------- Base / Desktop Layout ---------- */
 
 html, body {
     height: 100%;
@@ -680,6 +683,7 @@ html, body {
     overflow: auto; /* allow page scroll */
 }
 
+/* Layout wrapper: map on left, story panel on right */
 .map-layout {
     display: flex;
     height: 100vh;
@@ -699,21 +703,22 @@ html, body {
     height: 100%;
 }
 
-#triggers .step {
-    height: 100vh; /* each trigger covers a screen height */
-}
-
+/* Fixed-width story column (desktop) */
 #story {
-    flex: 0 0 400px; /* fixed width for story panel */
-    overflow-y: auto; /* scrollable text */
+    flex: 0 0 400px;
+    overflow-y: auto;
     padding: 24px;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255, 255, 255, 0.9);
     z-index: 1;
 }
 
+/* Each scroll "step" block */
+#triggers .step {
+    height: 100vh;
+}
 
 .step {
-    margin-bottom: 32px; 
+    margin-bottom: 32px;
     opacity: 0.3;
     transition: opacity 0.3s ease;
 }
@@ -722,29 +727,28 @@ html, body {
         opacity: 1;
     }
 
-    .step h3 {
-        margin-top: 0; /* remove the big top gap */
-        margin-bottom: 0.2rem; /* tiny space before subtitle */
-        font-size: 1.4rem; /* optional: adjust size */
+    /* Headings and text inside story cards */
+    .step h3,
+    .chapter h3 {
+        margin-top: 0;
+        margin-bottom: 0.2rem;
+        font-size: 1.4rem;
     }
 
 .subtitle {
-    margin-top: 0; /* no extra top margin */
-    margin-bottom: 0.5rem; /* small gap before date */
+    margin-top: 0;
+    margin-bottom: 0.5rem;
     font-size: 1rem;
     color: #555;
     font-weight: 500;
 }
 
 .date-pill {
-    margin-top: 0; /* keep date close */
-    margin-bottom: 0.5rem; /* gap before description */
-}
-
-
-.chapter h3 {
-    font-size: 1.4rem;
-    margin-bottom: 8px;
+    margin-top: -6px;
+    margin-bottom: 12px;
+    font-style: italic;
+    color: #777;
+    font-size: 0.95rem;
 }
 
 .chapter p {
@@ -759,65 +763,7 @@ html, body {
     margin-top: 0.5rem;
 }
 
-.date-pill {
-    font-style: italic;
-    color: #777;
-    font-size: 0.95rem;
-    margin-top: -6px;
-    margin-bottom: 12px;
-}
-
-@media (max-width: 768px) {
-    .map-layout {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-    }
-
-    #map-section {
-        flex: 0 0 45%; 
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-    }
-
-    #map {
-        position: relative;
-        width: 100%;
-        height: 100%;
-    }
-
-    #story {
-        flex: 0 0 45%; 
-        overflow-y: auto; 
-        width: 100%;
-        padding: 16px;
-        box-sizing: border-box;
-        background: rgba(255,255,255,0.95);
-        margin: 0;
-    }
-
-
-    #triggers .step {
-        min-height: 70vh;
-        margin-bottom: 2rem;
-    }
-
-
-    .chapter h3 {
-        font-size: 1.2rem;
-    }
-
-    .chapter p {
-        font-size: 0.95rem;
-    }
-
-    .date-pill {
-        font-size: 0.85rem;
-    }
-}
-
-
+/* Pulsing map marker */
 .pulsing-marker {
     animation: pulse 2s infinite;
     box-shadow: 0 0 6px rgba(0,0,0,0.2);
@@ -840,11 +786,89 @@ html, body {
     }
 }
 
-
 #content img {
     width: 100%;
     border-radius: 8px;
     margin: 12px 0;
+}
+
+/* =========================================================
+   📱 MOBILE OVERLAY LAYOUT  (max-width: 768px)
+   ========================================================= */
+@media (max-width: 768px) {
+
+    /* Stack map + story, full-height overlay style */
+    .map-layout {
+        height: 100vh;
+        overflow: hidden;
+        display: block;
+        position: relative;
+    }
+
+    #map-section,
+    #map {
+        position: absolute;
+        inset: 0;
+    }
+
+    /* Story overlay: translucent, scrollable */
+    #story {
+        position: absolute;
+        inset: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        background: rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(6px);
+        padding: 1.25rem 1rem;
+        box-sizing: border-box;
+    }
+
+        /* Story cards (steps/chapters) */
+        #story .chapter,
+        #story .step {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--radius);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            padding: 1.1rem 1.2rem;
+            margin-bottom: 1.25rem;
+            min-height: 55vh; /* ensures enough scroll distance for triggers */
+            display: flex;
+            align-items: flex-start;
+        }
+
+        #story h3 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: var(--deep);
+        }
+
+        #story p {
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Gentle fade at top for readability */
+        #story::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.7), transparent);
+            pointer-events: none;
+        }
+
+    /* Adjust trigger heights for smaller screens */
+    #triggers .step {
+        min-height: 70vh;
+        margin-bottom: 2rem;
+    }
+
+    .date-pill {
+        font-size: 0.85rem;
+    }
 }
 
 

@@ -134,24 +134,23 @@ map.on('load', () => {
     function initScroller() {
         try { scroller.destroy(); } catch (e) { }
 
-        // decide offset dynamically
+        // dynamic offset for better trigger timing
         const isMobile = window.innerWidth < 768;
-        const OFFSET = isMobile ? 0.05 : 0.25; // 5% from top on mobile, 25% on desktop
 
-        scroller.setup({
-            step: '.step',
-            offset: OFFSET,
-            container: '#story',
-            debug: false
-        })
-
+        scroller
+            .setup({
+                step: '.step',
+                container: '#story',             // ✅ watch scroll INSIDE story
+                offset: isMobile ? 0.55 : 0.5,   // ✅ trigger around middle of viewport
+                debug: false
+            })
             .onStepEnter(resp => {
                 const id = resp.element.id;
                 const idx = config.chapters.findIndex(c => c.id === id);
                 if (idx === -1) return;
                 const loc = config.chapters[idx].location;
 
-                // update pulsing dot
+                // Update pulsing dot
                 map.getSource('pulsing-point').setData({
                     type: 'FeatureCollection',
                     features: [{
@@ -160,17 +159,18 @@ map.on('load', () => {
                     }]
                 });
 
-                // fly to new location
+                // Smooth fly transition
                 map.flyTo({
                     center: loc.center,
                     zoom: loc.zoom,
                     bearing: loc.bearing,
                     pitch: loc.pitch,
                     duration: 1500,
+                    curve: 1.4,
                     essential: true
                 });
 
-                // update active class
+                // Active step highlight
                 document.querySelectorAll('.step.active').forEach(s => s.classList.remove('active'));
                 resp.element.classList.add('active');
             })
@@ -184,6 +184,6 @@ map.on('load', () => {
     }
 
     initScroller();
-    window.addEventListener('resize', () => setTimeout(() => initScroller(), 150));
-    window.addEventListener('orientationchange', () => setTimeout(() => initScroller(), 200));
+    window.addEventListener('resize', () => setTimeout(initScroller, 150));
+    window.addEventListener('orientationchange', () => setTimeout(initScroller, 200));
 });
