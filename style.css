@@ -545,6 +545,7 @@ footer {
         color: var(--deep);
         font-size: 1.6rem;
         cursor: pointer;
+        margin-right: 6px;
     }
 
     .menu {
