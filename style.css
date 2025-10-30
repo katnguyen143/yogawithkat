@@ -396,16 +396,67 @@ h2 {
 
 
 /* Gallery */
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 8px
+.gallery-subheading {
+    font-size: 1.4rem;
+    color: var(--deep);
+    margin: 2.5rem 0 1rem;
+    text-transform: lowercase;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border-left: 4px solid var(--teal);
+    padding-left: 10px;
 }
 
-    .gallery img {
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-top: 1rem;
+}
+
+    .gallery a {
+        position: relative;
+        overflow: hidden;
         border-radius: 12px;
-        aspect-ratio: 4/3;
-        object-fit: cover
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        transition: transform 0.4s ease, opacity 0.3s ease;
+        display: block;
+    }
+
+    .gallery a:hover img {
+        transform: scale(1.06);
+        opacity: 0.95;
+    }
+
+    .gallery a:hover {
+        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+
+    /* optional subtle overlay text */
+    .gallery a::after {
+        content: attr(data-glightbox);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px 12px;
+        background: linear-gradient(to top, rgba(0,0,0,0.45), transparent);
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 500;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .gallery a:hover::after {
+        opacity: 1;
     }
 
 /* Pricing */

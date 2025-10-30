@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" href="https://katnguyen143.github.io/kat-yoga-site/images/kat-logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="yoga & acroyoga with kat" />
@@ -187,15 +187,55 @@
         <div class="container">
             <span class="pill">gallery</span>
             <h2>yoga moments ♡</h2>
+            <p class="lead">
+                A glimpse into moments of teaching, connection, and self-practice that continue to shape how I share yoga.
+            </p>
+
+            <!-- Teaching Moments -->
+            <h3 class="gallery-subheading">teaching moments</h3>
             <div class="gallery">
-                <img loading="lazy" src="images/handstand.JPG" alt="handstand on the beach">
-                <img loading="lazy" src="images/h2h.JPG" alt="h2h at zen beach">
-                <img loading="lazy" src="images/lizard.JPG" alt="lizard pose">
-                <img loading="lazy" src="images/crow.JPG" alt="one-legged crow pose">
-                <img loading="lazy" src="images/outsiders.jpeg" alt="outdoor yoga class">
-                <img loading="lazy" src="images/toni.JPG" alt="yoga TA class">
-                <img loading="lazy" src="images/hitotsubashi.jpeg" alt="hitotsubashi yoga class">
-                <img loading="lazy" src="images/esh.jpeg" alt="indoor class">
+                <a href="images/outsiders.jpeg" data-glightbox="Outdoor yoga class with Outsiders">
+                    <img loading="lazy" src="images/outsiders.jpeg" alt="Outdoor yoga class with Outsiders" />
+                </a>
+                <a href="images/toni.JPG" data-glightbox="Destress with Yoga class">
+                    <img loading="lazy" src="images/toni.JPG" alt="Yoga TA class" />
+                </a>
+                <a href="images/haadrin.jpg" data-glightbox="Private beach yoga class">
+                    <img loading="lazy" src="images/haadrin.jpg" alt="Private beach yoga class" />
+                </a>
+                <a href="images/esh.jpeg" data-glightbox="Indoor Outsiders yoga class">
+                    <img loading="lazy" src="images/esh.jpeg" alt="Indoor yoga class" />
+                </a>
+
+                <a href="images/nestra-savasana.jpg" data-glightbox="Savasana at Nestra Beach Shala">
+                    <img loading="lazy" src="images/nestra-savasana.JPG" alt="Partner yoga class at Nestra" />
+                </a>
+                <a href="images/nestra-group.jpg" data-glightbox="Group class at Nestra Beach Shala">
+                    <img loading="lazy" src="images/nestra-group.jpeg" alt="Group class at Nestra Beach Shala" />
+                </a>
+                <a href="images/hitotsubashi.jpeg" data-glightbox="Teaching at Hitotsubashi University in Tokyo">
+                    <img loading="lazy" src="images/hitotsubashi.jpeg" alt="Hitotsubashi yoga class" />
+                </a>
+                <a href="images/hitotsu-class" data-glightbox="Teaching sequence building in Tokyo">
+                    <img loading="lazy" src="images/hitotsu-class.jpeg" alt="Teaching sequence building" />
+                </a>
+            </div>
+
+            <!-- Personal Practice -->
+            <h3 class="gallery-subheading">personal practice</h3>
+            <div class="gallery">
+                <a href="images/handstand.JPG" data-glightbox="title: Handstand on the beach">
+                    <img loading="lazy" src="images/handstand.JPG" alt="Handstand on the beach" />
+                </a>
+                <a href="images/h2h.JPG" data-glightbox="title: Partner acroyoga at Zen Beach">
+                    <img loading="lazy" src="images/h2h.JPG" alt="H2H acroyoga pose at Zen Beach" />
+                </a>
+                <a href="images/lizard.JPG" data-glightbox="title: Lizard pose, grounding in nature">
+                    <img loading="lazy" src="images/lizard.JPG" alt="Lizard pose yoga" />
+                </a>
+                <a href="images/crow.JPG" data-glightbox="title: One-legged crow pose">
+                    <img loading="lazy" src="images/crow.JPG" alt="One-legged crow pose" />
+                </a>
             </div>
         </div>
     </section>
@@ -379,5 +419,13 @@
             icon.classList.toggle('fa-bars');
             icon.classList.toggle('fa-xmark')
         }</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script>const lightbox = GLightbox({
+            touchNavigation: true,
+            loop: true,
+            closeButton: true,
+            slideEffect: 'fade',
+        });</script>
 </body>
 </html>
