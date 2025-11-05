@@ -510,6 +510,104 @@ h2 {
     color: #666;
 }
 
+/* === Interest Form Section === */
+#interest {
+    background: var(--sand);
+    padding: 72px 0;
+}
+
+    #interest h2 {
+        text-transform: lowercase;
+        color: var(--deep);
+        margin-bottom: 0.75rem;
+    }
+
+    #interest .lead {
+        color: var(--muted);
+        font-size: 1.05rem;
+        max-width: 700px;
+        margin-bottom: 2rem;
+    }
+
+/* --- Form --- */
+#interestForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+}
+
+    #interestForm .btn {
+        align-self: flex-end;
+        padding: 12px 24px;
+    }
+
+    #interestForm input,
+    #interestForm textarea {
+        width: 100%;
+        font-family: 'IBM Plex Sans', system-ui, sans-serif;
+        font-size: 1rem;
+        color: var(--deep);
+        background: var(--white);
+        border: 1.8px solid rgba(16,32,31,0.08);
+        border-radius: var(--radius);
+        padding: 14px 16px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        #interestForm input:focus,
+        #interestForm textarea:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(43,166,166,0.15);
+            outline: none;
+        }
+
+    #interestForm textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    #interestForm button {
+        align-self: flex-start;
+        background: var(--teal);
+        color: var(--white);
+        border: none;
+        padding: 12px 24px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.25s ease, transform 0.15s ease;
+    }
+
+        #interestForm button:hover {
+            background: #239090;
+            transform: translateY(-1px);
+        }
+
+/* --- Response Message --- */
+#interestResponse {
+    text-align: center;
+    margin-top: 1.2rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+    min-height: 24px;
+}
+
+/* --- Mobile --- */
+@media (max-width: 640px) {
+    #interestForm {
+        padding: 0 1rem;
+    }
+
+        #interestForm button {
+            align-self: center;
+        }
+}
+
 
 /* CTA banner */
 .cta {

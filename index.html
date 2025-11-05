@@ -321,13 +321,25 @@
                     </div>
                 </section>
 
+                <section id="interest">
+                    <div class="container">
+                        <span class="pill">stay in the loop</span>
+                        <h2>yoga interest form ♡</h2>
+                        <p class="lead">
+                            I’m currently preparing to start community yoga classes soon!
+                            If you’d like to be notified when they begin, leave your info below.
+                            I’ll send you an email once classes open.
+                        </p>
 
-
-
-                <div style="margin-top: 12px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
-                    <a class="btn btn-primary" href="https://calendly.com/yoga-kat" target="_blank" rel="noopener">open booking</a>
-                    <a class="btn btn-outline" href="https://wa.me/16506700843" target="_blank" rel="noopener">message me</a>
-                </div>
+                        <form id="interestForm">
+                            <input type="text" name="name" placeholder="Your Name" required />
+                            <input type="email" name="email" placeholder="Email Address" required />
+                            <textarea name="message" rows="3" placeholder="Optional: share what kind of classes you’re interested in (gentle, vinyasa, acro, etc.)"></textarea>
+                            <button type="submit" class="btn btn-primary">submit interest form</button>
+                        </form>
+                        <p id="interestResponse"></p>
+                    </div>
+                </section>
             </div>
         </div>
     </section>
@@ -426,6 +438,35 @@
             loop: true,
             closeButton: true,
             slideEffect: 'fade',
+        });</script>
+
+    <script>document.getElementById('interestForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const data = {
+                name: form.name.value.trim(),
+                email: form.email.value.trim(),
+                message: form.message.value.trim()
+            };
+
+            const response = document.getElementById('interestResponse');
+            response.textContent = "Submitting...";
+
+            try {
+                await fetch(
+                    "https://script.google.com/macros/s/AKfycbyPbstSiXmBhuKzwEzZw8D0oiX6eJy15NYsGrwWCm3MycCsEEkBy6myE71NKYKahn23Fw/exec",
+                    {
+                        method: "POST",
+                        mode: "no-cors",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(data)
+                    }
+                );
+                response.textContent = "Thanks for signing up ♡ I’ll reach out when classes begin!";
+                form.reset();
+            } catch (err) {
+                response.textContent = "Oops — something went wrong. Please try again.";
+            }
         });</script>
 </body>
 </html>
