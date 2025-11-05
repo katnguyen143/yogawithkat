@@ -600,11 +600,25 @@ h2 {
 /* --- Mobile --- */
 @media (max-width: 640px) {
     #interestForm {
-        padding: 0 1rem;
+        max-width: 100%;
+        padding: 1.25rem;
+        box-shadow: none;
+        border-radius: 0;
+        background: transparent;
     }
 
-        #interestForm button {
+        #interestForm input,
+        #interestForm textarea {
+            font-size: 0.95rem;
+            padding: 10px 12px;
+        }
+
+        /* Center the button on mobile */
+        #interestForm .btn {
             align-self: center;
+            width: 100%;
+            max-width: 280px;
+            margin-top: 0.5rem;
         }
 }
 
