@@ -132,6 +132,20 @@ var config = {
                 pitch: 45,
                 bearing: 0
             }
+        },
+        {
+            id: 'ladera_rec',
+            title: 'Yoga Instructor — Ladera Recreation District',
+            subtitle: 'Portola Valley, California',
+            date: 'Nov 2025 - Present',
+            description: 'Teach a weekly all-levels vinyasa flow blending gentle warm-ups, breathwork, and accessible dynamic poses to build mobility and balance.',
+            image: 'images/esh.jpeg',
+            location: {
+                center: [-122.19958548726125, 37.403524445910385],
+                zoom: 13,
+                pitch: 45,
+                bearing: 0
+            }
         }
     ]
 
