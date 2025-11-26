@@ -6,7 +6,7 @@
     <title>yoga & acroyoga with kat</title>
     <meta name="description" content="Yoga and AcroYoga with Kat at Nestra Beach Shala in Koh Phangan — book group classes, private sessions, or online lessons." />
     <link rel="canonical" href="https://www.example.com/" />
-    <link rel="icon" type="image/png" href="https://katnguyen143.github.io/kat-yoga-site/images/kat-logo.png">
+    <link rel="icon" type="image/png" href="https://katnguyen143.github.io/kat-yoga-site/images/kat-logo-t.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -120,42 +120,19 @@
     <!-- Schedule -->
     <section id="schedule" aria-label="Featured schedule">
         <div class="container">
-            <span class="pill">past classes</span>
+            <span class="pill">upcoming classes</span>
             <h2>a week at the shala</h2>
-            <div class="schedule">
-                <div class="card slot">
-                    <div class="meta">
-                        <span>Mon</span> • <span>10:15</span> • <span>Nestra Beach Shala</span>
-                    </div>
-                    <h4>Flow for All (Donation-based)</h4>
-                    <p class="lead">A community-centered vinyasa class designed to be inclusive and adaptable. Perfect for locals, travelers, and anyone needing a soft reset.</p>
-                    <div class="actions">
-                        <a class="btn btn-primary" href="#booking">book now</a>
-                    </div>
-                </div>
-                <div class="card slot">
-                    <div class="meta">
-                        <span>Tues/Thu</span> • <span>17:30</span> • <span>Nestra Beach Shala</span>
-                    </div>
-                    <h4>Yang to Yin Sunset Flow</h4>
-                    <p class="lead">Ease into the evening with a sunset flow that starts strong and settles soft—balancing fiery movement with grounding stillness by the sea.</p>
-                    <div class="actions">
-                        <a class="btn btn-primary" href="#booking">book now</a>
-                    </div>
-                </div>
-                <div class="card slot">
-                    <div class="meta">
-                        <span>Fri</span> • <span>10:15</span> • <span>Nestra Beach Shala</span>
-                    </div>
-                    <h4>Handstand and Inversions Flow</h4>
-                    <p class="lead">Flip your perspective in this playful flow that builds strength, confidence, and upside-down joy through handstands and inversions.</p>
-                    <div class="actions">
-                        <a class="btn btn-primary" href="#booking">book now</a>
-                    </div>
-                </div>
+
+            <div class="schedule" id="schedule-grid">
+                <!-- JS will inject .card.slot items here -->
             </div>
+
+            <p id="schedule-empty" class="lead" style="color:var(--muted); display:none;">
+                No classes are currently scheduled — join the interest list to be notified when new classes are added. ♡
+            </p>
         </div>
     </section>
+
 
 
     <!-- Testimonials -->
@@ -439,6 +416,90 @@
             closeButton: true,
             slideEffect: 'fade',
         });</script>
+
+    <script>// format helpers
+        function formatPieces(isoString) {
+            const d = new Date(isoString);
+            return {
+                weekday: d.toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    timeZone: 'America/Los_Angeles'
+                }),                     // e.g. "Mon"
+                monthDay: d.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    timeZone: 'America/Los_Angeles'
+                }),                     // e.g. "Sep 5"
+                time: d.toLocaleTimeString('en-US', {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    timeZone: 'America/Los_Angeles'
+                })                      // e.g. "10:15 AM"
+            };
+        }
+
+        // JSONP callback – name must match "callback=renderSchedule" below
+        function renderSchedule(data) {
+            const grid = document.getElementById('schedule-grid');
+            const emptyMsg = document.getElementById('schedule-empty');
+
+            if (!data || !data.events || data.events.length === 0) {
+                emptyMsg.style.display = 'block';
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+
+            grid.innerHTML = data.events.map(ev => {
+                const parts = formatPieces(ev.start);
+
+                const locShort = ev.location || 'Location TBA';
+                const locFull = ev.locationFull || locShort;
+
+                const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locFull)}`;
+                const desc = ev.description || 'A community-centered, all-levels class open to locals and travelers.';
+
+                return `
+              <div class="card slot">
+                <div class="meta">
+                <span>${parts.monthDay}</span> •
+                <span>${parts.weekday}</span> •
+                <span>${parts.time}</span> •
+                  <span>
+                    <a href="${mapsUrl}" target="_blank" rel="noopener">
+                      ${locShort}
+                    </a>
+                  </span>
+                </div>
+                <h4>${ev.title}</h4>
+                <p class="lead">${desc}</p>
+                <div class="actions">
+                  ${ev.registration
+                                ? `<a class="btn btn-primary" href="${ev.registration}" target="_blank" rel="noopener">register here</a>`
+                                : `<a class="btn btn-primary" href="#interest">join interest list</a>`
+                            }
+                </div>
+              </div>
+            `;
+            }).join('');
+        }
+
+
+        // Load events from your Apps Script web app (JSONP)
+        (function loadSchedule() {
+            const script = document.createElement('script');
+            const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzahm0ZO-mq2ElQBKIdZLI5r88FuVBlGzALL8YtrURoJTrYFpmsaMl7OjkmrrAxkWnU_A/exec';
+
+            const params = new URLSearchParams({
+                max: '3',
+                tz: 'America/Los_Angeles',
+                callback: 'renderSchedule'
+            });
+
+            script.src = `${WEB_APP_URL}?${params.toString()}`;
+            document.body.appendChild(script);
+        })();</script>
+
 
     <script>document.getElementById('interestForm').addEventListener('submit', async (e) => {
             e.preventDefault();
