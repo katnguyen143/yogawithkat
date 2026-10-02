@@ -207,7 +207,7 @@ var config = {
             subtitle: 'Tsukuba, Japan',
             date: 'Sept 2026 - Present',
             description: 'Conducting research on Zen-influenced yoga, examining embodied discipline, breathwork, ritual, and the cultivation of focus in relation to athletic performance and well-being.',
-            image: 'images/tias.jpeg',
+            image: 'images/tias.jpg',
             location: {
                 center: [140.104412, 36.103338],
                 zoom: 13,
