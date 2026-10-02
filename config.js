@@ -179,7 +179,7 @@ var config = {
             subtitle: 'Seattle, Washington',
             date: 'May 2026 - Present',
             description: 'Teach a weekly hot yoga flow class, leading students through dynamic, breath-linked sequences while fostering a welcoming and accessible environment for all levels.',
-            //image: 'images/csm.jpeg',
+            image: 'images/uys.jpeg',
             location: {
                 center: [-122.33871174535325, 47.61268589492677],
                 zoom: 13,
