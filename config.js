@@ -177,11 +177,39 @@ var config = {
             id: 'uys',
             title: 'Yoga Instructor — Urban Yoga Spa',
             subtitle: 'Seattle, Washington',
-            date: 'May 2026 - Present',
+            date: 'May 2026 - Sept 2026',
             description: 'Teach a weekly hot yoga flow class, leading students through dynamic, breath-linked sequences while fostering a welcoming and accessible environment for all levels.',
             image: 'images/uys.jpeg',
             location: {
                 center: [-122.33871174535325, 47.61268589492677],
+                zoom: 13,
+                pitch: 45,
+                bearing: 0
+            }
+        },
+        {
+            id: 'sanca',
+            title: 'Aerial Coach — SANCA',
+            subtitle: 'Seattle, Washington',
+            date: 'June 2026 - Aug 2026',
+            description: 'Coached youth aerial arts (fabric and trapeze), acrobatics, and performance camps at the School of Acrobatics & New Circus Arts. Led skill instruction, supported students\' physical development and confidence, and helped create and rehearse performance pieces.',
+            image: 'images/sanca.jpeg',
+            location: {
+                center: [-122.324774, 47.551940],
+                zoom: 13,
+                pitch: 45,
+                bearing: 0
+            }
+        },
+        {
+            id: 'tsukuba',
+            title: 'Master\'s Student — University of Tsukuba ',
+            subtitle: 'Tsukuba, Japan',
+            date: 'Sept 2026 - Present',
+            description: 'Conducting research on Zen-influenced yoga, examining embodied discipline, breathwork, ritual, and the cultivation of focus in relation to athletic performance and well-being.',
+            image: 'images/tias.jpeg',
+            location: {
+                center: [140.104412, 36.103338],
                 zoom: 13,
                 pitch: 45,
                 bearing: 0
