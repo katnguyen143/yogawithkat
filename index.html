@@ -404,17 +404,17 @@ function formatPieces(isoString) {
     return {
         weekday: d.toLocaleDateString('en-US', {
             weekday: 'short',
-            timeZone: 'America/Los_Angeles'
+            timeZone: 'Asia/Tokyo'
         }),
         monthDay: d.toLocaleDateString('en-US', {
             month: 'short',
             day: 'numeric',
-            timeZone: 'America/Los_Angeles'
+            timeZone: 'Asia/Tokyo'
         }),
         time: d.toLocaleTimeString('en-US', {
             hour: 'numeric',
             minute: '2-digit',
-            timeZone: 'America/Los_Angeles'
+            timeZone: 'Asia/Tokyo'
         })
     };
 }
