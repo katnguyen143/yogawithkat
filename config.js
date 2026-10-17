@@ -137,7 +137,7 @@ var config = {
             subtitle: 'Portola Valley, California',
             date: 'Nov 2025 - June 2026',
             description: 'Teach a weekly all-levels Ashtanga-Vinyasa flow blending gentle warm-ups, breathwork, and accessible dynamic poses to build mobility and balance.',
-            image: 'images/esh.jpeg',
+            image: 'images/ladera.jpeg',
             location: {
                 center: [-122.19958548726125, 37.403524445910385],
                 zoom: 13,
@@ -205,11 +205,25 @@ var config = {
             id: 'tsukuba',
             title: 'Master\'s Student — University of Tsukuba ',
             subtitle: 'Tsukuba, Japan',
-            date: 'Sept 2026 - Present',
+            date: 'Oct 2026 - Present',
             description: 'Conducting research on Zen-influenced yoga, examining embodied discipline, breathwork, ritual, and the cultivation of focus in relation to athletic performance and well-being.',
             image: 'images/tias.jpg',
             location: {
                 center: [140.104412, 36.103338],
+                zoom: 13,
+                pitch: 45,
+                bearing: 0
+            }
+        },
+        {
+            id: 'yods',
+            title: 'Yoga Instructor — YODA Studio ',
+            subtitle: 'Tsukuba, Japan',
+            date: 'Oct 2026 - Present',
+            description: 'Teaching weekly Ashtanga-Vinyasa yoga classes that explore creative sequencing and inversions to challenge strength, flexibility, and balance.',
+            image: 'images/yoda.jpeg',
+            location: {
+                center: [140.114588, 36.078210],
                 zoom: 13,
                 pitch: 45,
                 bearing: 0
