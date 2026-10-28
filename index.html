@@ -105,8 +105,8 @@
                 </div>
                 <p>
                 My group yoga classes are a fun blend of dynamic, yet accessible sequences.
-                Whether you're looking for a place to start or to deepen your practice, you'll be supported
-                with clear guidance, breath cues, and optional props. Expect to break a sweat and for 
+                No matter where you are in your practice, you'll be supported
+                with clear guidance, breath cues, and optional props for pose modification. Expect to break a sweat and for 
                 a mix of strength-building, flexibility, and breathwork.
                 </p>
             </div>
@@ -420,6 +420,17 @@ function formatPieces(isoString) {
 }
 
 // JSONP callback – name must match "callback=renderSchedule" in URL
+
+// Pull the first clean URL out of a string that may contain HTML from Google Calendar
+function extractUrl(raw) {
+    if (!raw) return null;
+    const text = String(raw)
+        .replace(/&quot;|&gt;|&lt;|&#39;/g, ' ')   // HTML entities → break points
+        .replace(/&amp;/g, '&');
+    const match = text.match(/https?:\/\/[^\s"'<>]+/i);
+    return match ? match[0].replace(/[.,)]+$/, '') : null; // drop trailing punctuation
+}
+
 function renderSchedule(data) {
     console.log('Schedule data received:', data);
     
@@ -447,7 +458,7 @@ function renderSchedule(data) {
         const locFull = ev.locationFull || locShort;
         const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locFull)}`;
         const desc = ev.description || 'A community-centered, all-levels class open to locals and travelers.';
-        const regUrl = ev.registration ? ev.registration.trim().replace(/"/g, '') : null;  // ← must be inside map
+        const regUrl = extractUrl(ev.registration);
 
         return `
             <div class="card slot">
