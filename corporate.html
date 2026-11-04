@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>corporate & team yoga · yoga & acro with kat</title>
-    <meta name="description" content="Accessible yoga, breathwork and partner-movement sessions for offices, universities and remote teams in Tsukuba, Tokyo and online." />
+    <meta name="description" content="Accessible yoga and breathwork sessions for offices, universities and remote teams in Tsukuba, Tokyo and online." />
     <link rel="icon" type="image/png" href="https://katnguyen143.github.io/yogawithkat/images/kat-logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -25,7 +25,6 @@
         .benefit h3 { font-size: 20px; margin: 14px 0 8px; }
         .benefit p { margin: 0; color: var(--muted); }
 
-        .corp-offers { grid-template-columns: repeat(2, 1fr); }
         .offer .meta { font-size: 14px; font-weight: 600; color: var(--muted); margin: -6px 0 12px; }
         .offer ul { margin: 14px 0 18px; padding-left: 20px; }
         .offer li { margin-bottom: 4px; }
@@ -69,11 +68,24 @@
         #corpForm .actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
         #corpForm .hint { text-align: center; font-size: 14px; color: var(--muted); margin: 0; }
 
+        /* tighter spacing on this page */
+        body > section:not(.hero) { padding: 56px 0; }
+        .section-head h2 { margin: 10px 0 12px; }
+        .benefits, .steps, .corp-offers { margin-top: 24px; }
+        .benefit { padding: 24px; }
+        .corp-offers .offer { padding: 26px; }
+        .offer ul { margin: 12px 0 14px; }
+        .custom-note { margin-top: 20px; }
+        .faq { margin-top: 20px; }
+        #faq { padding-top: 16px; }
+        .faq details { padding: 14px 20px; margin-bottom: 10px; }
+        #corpForm { gap: 14px; }
+
         @media (max-width: 900px) {
             .benefits, .steps { grid-template-columns: 1fr; }
-            .corp-offers { grid-template-columns: 1fr; }
         }
         @media (max-width: 600px) {
+            body > section:not(.hero) { padding: 40px 0; }
             .corp-hero .hero-inner { padding: 24px 20px; }
             #corpForm .row { grid-template-columns: 1fr; }
         }
@@ -111,8 +123,8 @@
         <div class="hero-inner">
             <h1>yoga for teams & workplaces</h1>
             <p>
-                Accessible yoga, breathwork and partner movement sessions that help your team
-                focus and connect. No experience or flexibility needed!
+                Accessible yoga and breathwork sessions that help your team
+                focus, recharge and feel good at work. No experience or flexibility needed!
             </p>
             <div class="actions">
                 <a href="#inquire" class="btn btn-primary">request a proposal</a>
@@ -141,9 +153,9 @@
                     <p>Simple breath practices your team can reuse before a deadline or presentation.</p>
                 </div>
                 <div class="card benefit">
-                    <i class="fa-solid fa-people-group" aria-hidden="true"></i>
-                    <h3>build real connection</h3>
-                    <p>Playful partner work that gets colleagues to connect.</p>
+                    <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                    <h3>ease everyday stress</h3>
+                    <p>Slow movement and guided relaxation that help your team unwind and recharge.</p>
                 </div>
             </div>
         </div>
@@ -154,7 +166,7 @@
         <div class="container">
             <div class="section-head">
                 <span class="pill">offerings</span>
-                <h2>pick a format, or mix them into a program</h2>
+                <h2>pick a format!</h2>
             </div>
 
             <div class="grid-3 corp-offers">
@@ -187,21 +199,6 @@
                         <li>Optional pre/post wellbeing check-in</li>
                     </ul>
                     <p class="rate">from ¥80,000 / series</p>
-                </div>
-
-                <div class="card offer">
-                    <div class="offer-header">
-                        <h3>team connection workshop</h3>
-                        <div class="icon" aria-hidden="true"><img src="images/acro-t.png" alt=""></div>
-                    </div>
-                    <p class="meta">60–90 min · groups of 6+</p>
-                    <p>Acroyoga-inspired partner and group exercises that are grounded, safe and low to the floor.</p>
-                    <ul>
-                        <li>Trust &amp; communication games</li>
-                        <li>Partner balances for all levels</li>
-                        <li>Great for offsites &amp; onboarding</li>
-                    </ul>
-                    <p class="rate">from ¥25,000 / workshop</p>
                 </div>
 
                 <div class="card offer">
@@ -285,7 +282,7 @@
     </section>
 
     <!-- FAQ -->
-    <section aria-label="Frequently asked questions">
+    <section id="faq" aria-label="Frequently asked questions">
         <div class="container">
             <div class="section-head center">
                 <span class="pill">faq</span>
@@ -303,10 +300,6 @@
                 <details>
                     <summary>What space do we need?</summary>
                     <p>A meeting room with the chairs pushed aside works well. For mat classes, plan roughly 2 x 1 m per person.</p>
-                </details>
-                <details>
-                    <summary>Is partner work safe for everyone?</summary>
-                    <p>Yes, workshops stay low to the ground and everything is opt-in. No one is lifted without consent.</p>
                 </details>
                 <details>
                     <summary>How is pricing set?</summary>
@@ -339,7 +332,6 @@
                         <select name="format">
                             <option>Lunchtime reset</option>
                             <option>Weekly wellness series</option>
-                            <option>Team connection workshop</option>
                             <option>Breath &amp; focus break</option>
                             <option>Not sure yet</option>
                         </select>
