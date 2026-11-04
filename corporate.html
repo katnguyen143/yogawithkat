@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>corporate & team yoga · yoga & acro with kat</title>
+    <meta name="description" content="Accessible yoga, breathwork and partner-movement sessions for offices, universities and remote teams in Tsukuba, Tokyo and online." />
+    <link rel="icon" type="image/png" href="https://katnguyen143.github.io/yogawithkat/images/kat-logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ---- corporate page ---- */
+        .corp-hero .hero-inner { max-width: 860px; padding: 40px 24px; }
+        .corp-hero h1 { text-transform: none; }
+        .corp-hero .hero-note { font-size: 15px; margin-top: 20px; opacity: .95; }
+
+        .section-head { max-width: 720px; margin-bottom: 8px; }
+        .section-head.center { margin: 0 auto 8px; text-align: center; }
+
+        .benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 36px; }
+        .benefit { padding: 28px; }
+        .benefit .fa-solid { font-size: 26px; color: var(--teal); }
+        .benefit h3 { font-size: 20px; margin: 14px 0 8px; }
+        .benefit p { margin: 0; color: var(--muted); }
+
+        .corp-offers { grid-template-columns: repeat(2, 1fr); }
+        .offer .meta { font-size: 14px; font-weight: 600; color: var(--muted); margin: -6px 0 12px; }
+        .offer ul { margin: 14px 0 18px; padding-left: 20px; }
+        .offer li { margin-bottom: 4px; }
+        .offer .rate { font-weight: 700; color: var(--teal); }
+        .offer.featured { border: 2px solid var(--teal); }
+        .offer .tag {
+            display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .06em;
+            text-transform: uppercase; color: var(--white); background: var(--coral);
+            border-radius: 999px; padding: 3px 10px; margin-bottom: 10px;
+        }
+        .custom-note { text-align: center; margin: 28px 0 0; color: var(--muted); }
+
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin: 36px 0 0; padding: 0; list-style: none; }
+        .steps .num { font-size: 48px; font-weight: 700; line-height: 1; color: var(--coral); }
+        .steps h3 { font-size: 20px; margin: 12px 0 8px; }
+        .steps p { margin: 0; color: var(--muted); }
+
+        .taught-at { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .taught-at span {
+            background: var(--white); border: 1px solid rgba(43,166,166,.25); color: var(--deep);
+            border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 600;
+        }
+
+
+        .faq { max-width: 860px; margin: 32px auto 0; }
+        .faq details { background: var(--white); border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); padding: 18px 22px; margin-bottom: 12px; }
+        .faq summary { cursor: pointer; font-weight: 700; color: var(--deep); font-size: 17px; }
+        .faq details p { margin: 10px 0 0; color: var(--muted); }
+
+        #corpForm { display: flex; flex-direction: column; gap: 16px; max-width: 720px; margin: 0 auto; }
+        #corpForm .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        #corpForm label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px; color: var(--deep); }
+        #corpForm input, #corpForm select, #corpForm textarea {
+            width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 16px; color: var(--deep);
+            background: var(--white); border: 2px solid transparent; border-radius: var(--radius-sm);
+            padding: 14px 16px; box-shadow: var(--shadow-sm); transition: var(--transition);
+        }
+        #corpForm input:focus, #corpForm select:focus, #corpForm textarea:focus {
+            border-color: var(--teal); outline: none; box-shadow: 0 0 0 4px rgba(43,166,166,.1);
+        }
+        #corpForm .actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+        #corpForm .hint { text-align: center; font-size: 14px; color: var(--muted); margin: 0; }
+
+        @media (max-width: 900px) {
+            .benefits, .steps { grid-template-columns: 1fr; }
+            .corp-offers { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .corp-hero .hero-inner { padding: 24px 20px; }
+            #corpForm .row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav">
+            <a class="brand" href="index.html" aria-label="Home">
+                <img src="images/kat-logo-t.png" alt="Kat Yoga logo" class="logo" />
+                <span>yoga & acro with kat ♡</span>
+            </a>
+
+            <button class="mobile-toggle" aria-label="Toggle menu" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav class="menu" id="mobileMenu" aria-label="Primary">
+                <a href="journey.html">my journey</a>
+                <a href="index.html#offerings">classes</a>
+                <a href="corporate.html" aria-current="page">corporate</a>
+                <a href="index.html#schedule">schedule</a>
+                <a href="index.html#contact">contact</a>
+                <a class="btn btn-outline" href="booking.html">book a class</a>
+                <a href="resources.html">resources</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero corp-hero">
+        <img src="images/hitotsu-class.jpeg" alt="Kat leading a group yoga class" class="hero-bg-image" />
+        <div class="hero-inner">
+            <h1>yoga for teams & workplaces</h1>
+            <p>
+                Accessible yoga, breathwork and partner movement sessions that help your team
+                focus and connect. No experience or flexibility needed!
+            </p>
+            <div class="actions">
+                <a href="#inquire" class="btn btn-primary">request a proposal</a>
+                <a href="#offerings" class="btn btn-outline">see offerings</a>
+            </div>
+            <p class="hero-note">In person around Tsukuba &amp; Tokyo, or online anywhere · taught in English</p>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section aria-label="Why teams book">
+        <div class="container">
+            <div class="section-head">
+                <span class="pill">why movement at work</span>
+                <h2>small breaks, big difference</h2>
+            </div>
+            <div class="benefits">
+                <div class="card benefit">
+                    <i class="fa-solid fa-person-walking" aria-hidden="true"></i>
+                    <h3>reset desk-bound bodies</h3>
+                    <p>Gentle mobility for necks, shoulders, hips and backs that sit all day.</p>
+                </div>
+                <div class="card benefit">
+                    <i class="fa-solid fa-wind" aria-hidden="true"></i>
+                    <h3>come back focused</h3>
+                    <p>Simple breath practices your team can reuse before a deadline or presentation.</p>
+                </div>
+                <div class="card benefit">
+                    <i class="fa-solid fa-people-group" aria-hidden="true"></i>
+                    <h3>build real connection</h3>
+                    <p>Playful partner work that gets colleagues laughing, trusting and talking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offerings -->
+    <section id="offerings" aria-label="Corporate offerings">
+        <div class="container">
+            <div class="section-head">
+                <span class="pill">offerings</span>
+                <h2>pick a format, or mix them into a program</h2>
+            </div>
+
+            <div class="grid-3 corp-offers">
+                <div class="card offer">
+                    <div class="offer-header">
+                        <h3>lunchtime reset</h3>
+                        <div class="icon" aria-hidden="true"><img src="images/group-t.png" alt=""></div>
+                    </div>
+                    <p class="meta">30–45 min · chair or mat</p>
+                    <p>A drop-in class to unwind the workday body. Doable in work clothes, in a meeting room.</p>
+                    <ul>
+                        <li>Gentle Hatha or Vinyasa flow</li>
+                        <li>Desk-friendly stretches</li>
+                        <li>Short closing relaxation</li>
+                    </ul>
+                    <p class="rate">from ¥12,000 / session</p>
+                </div>
+
+                <div class="card offer featured">
+                    <span class="tag">most popular</span>
+                    <div class="offer-header">
+                        <h3>weekly wellness series</h3>
+                        <div class="icon" aria-hidden="true"><img src="images/group-t.png" alt=""></div>
+                    </div>
+                    <p class="meta">weekly · 6 or 8 weeks</p>
+                    <p>A recurring class that builds week by week, so the habit actually sticks.</p>
+                    <ul>
+                        <li>Ashtanga-Vinyasa or gentle Hatha track</li>
+                        <li>Options for total beginners</li>
+                        <li>Optional pre/post wellbeing check-in</li>
+                    </ul>
+                    <p class="rate">from ¥80,000 / series</p>
+                </div>
+
+                <div class="card offer">
+                    <div class="offer-header">
+                        <h3>team connection workshop</h3>
+                        <div class="icon" aria-hidden="true"><img src="images/acro-t.png" alt=""></div>
+                    </div>
+                    <p class="meta">60–90 min · groups of 6+</p>
+                    <p>Acroyoga-inspired partner and group exercises — grounded, safe and low to the floor.</p>
+                    <ul>
+                        <li>Trust &amp; communication games</li>
+                        <li>Partner balances for all levels</li>
+                        <li>Great for offsites &amp; onboarding</li>
+                    </ul>
+                    <p class="rate">from ¥25,000 / workshop</p>
+                </div>
+
+                <div class="card offer">
+                    <div class="offer-header">
+                        <h3>breath &amp; focus break</h3>
+                        <div class="icon" aria-hidden="true"><img src="images/donation-t.png" alt=""></div>
+                    </div>
+                    <p class="meta">15–20 min · online or on site</p>
+                    <p>A short guided pause to open a meeting, conference day or all-hands.</p>
+                    <ul>
+                        <li>Seated, no mat needed</li>
+                        <li>Breathwork your team can reuse</li>
+                        <li>Works on Zoom / Teams</li>
+                    </ul>
+                    <p class="rate">from ¥8,000 / session</p>
+                </div>
+            </div>
+
+            <p class="custom-note">Starting prices include up to 15 participants and travel within Tsukuba. Larger groups and Tokyo sessions are quoted individually.<br>If you're looking for something different (retreat days, conference sessions, or custom packages), <a href="#inquire">feel free to ask</a>!</p>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section aria-label="How it works">
+        <div class="container">
+            <div class="section-head">
+                <span class="pill">how it works</span>
+                <h2>three steps, zero hassle</h2>
+            </div>
+            <ol class="steps">
+                <li>
+                    <span class="num">01</span>
+                    <h3>quick intro chat</h3>
+                    <p>We talk about your team's size, schedule, space and goals.</p>
+                </li>
+                <li>
+                    <span class="num">02</span>
+                    <h3>tailored plan</h3>
+                    <p>You get a simple proposal with the format, dates and pricing.</p>
+                </li>
+                <li>
+                    <span class="num">03</span>
+                    <h3>show up &amp; breathe</h3>
+                    <p>I bring the plan, your team just shows up!</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section aria-label="About Kat">
+        <div class="container split">
+            <div>
+                <span class="pill">your teacher</span>
+                <h2>hi, i'm kat!</h2>
+                <p class="lead">
+                    I'm an RYT-200 yoga teacher and acroyoga instructor based in Tsukuba, Japan, currently pursuing my
+                    Master's in Sport Science &amp; Medicine. My teaching is rooted in the Ashtanga-Vinyasa tradition,
+                    and I've taught in studios, universities, corporate offices, and retreat settings in Japan, Thailand and the USA.
+                </p>
+                <p class="lead">
+                    I put accessibility at the heart of every class. The least-flexible person in the room should feel
+                    just as welcome as the most experienced.
+                </p>
+                <div class="taught-at" aria-label="Places Kat has taught">
+                    <span>YODA Studio, Tsukuba</span>
+                    <span>Hitotsubashi University</span>
+                    <span>University of Tsukuba (TIAS)</span>
+                    <span>SANCA Seattle</span>
+                    <span>Urban Yoga Spa, Seattle</span>
+                    <span>Cañada College</span>
+                </div>
+                <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+                    <a class="btn btn-outline" href="journey.html">see my journey</a>
+                </div>
+            </div>
+            <div class="card" style="overflow:hidden">
+                <img src="images/tias.jpg" alt="Kat teaching a group yoga class" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section aria-label="Frequently asked questions">
+        <div class="container">
+            <div class="section-head center">
+                <span class="pill">faq</span>
+                <h2>good questions</h2>
+            </div>
+            <div class="faq">
+                <details open>
+                    <summary>Does my team need yoga experience?</summary>
+                    <p>Not at all. Every pose comes with an easier option, and chair-based versions are always available.</p>
+                </details>
+                <details>
+                    <summary>What language are sessions taught in?</summary>
+                    <p>Sessions are taught in English with simple Japanese cues for movement and breath. This is a great fit for international teams.</p>
+                </details>
+                <details>
+                    <summary>What space do we need?</summary>
+                    <p>A meeting room with the chairs pushed aside works well. For mat classes, plan roughly 2 x 1 m per person.</p>
+                </details>
+                <details>
+                    <summary>Is partner work safe for everyone?</summary>
+                    <p>Yes, workshops stay low to the ground and everything is opt-in. No one is lifted without consent.</p>
+                </details>
+                <details>
+                    <summary>How is pricing set?</summary>
+                    <p>Starting prices cover up to 15 participants and travel within Tsukuba. Larger groups add about ¥5,000 per extra 10 people, and sessions in Tokyo include a travel fee. Send an inquiry and I'll put together an exact quote.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inquiry -->
+    <section id="inquire" aria-label="Request a proposal">
+        <div class="container">
+            <div class="section-head center">
+                <span class="pill">let's work together</span>
+                <h2>request a proposal</h2>
+                <p class="lead">Tell me a little about your group and I'll get back to you with ideas and a quote.</p>
+            </div>
+
+            <form id="corpForm">
+                <div class="row">
+                    <label>Your name<input type="text" name="name" required></label>
+                    <label>Company / organization<input type="text" name="company" required></label>
+                </div>
+                <div class="row">
+                    <label>Email<input type="email" name="email" required></label>
+                    <label>Location<input type="text" name="location" placeholder="e.g. Tsukuba office, online"></label>
+                </div>
+                <div class="row">
+                    <label>Interested in
+                        <select name="format">
+                            <option>Lunchtime reset</option>
+                            <option>Weekly wellness series</option>
+                            <option>Team connection workshop</option>
+                            <option>Breath &amp; focus break</option>
+                            <option>Not sure yet</option>
+                        </select>
+                    </label>
+                    <label>Group size
+                        <select name="size">
+                            <option>Under 10</option>
+                            <option>10–25</option>
+                            <option>25–50</option>
+                            <option>50+</option>
+                        </select>
+                    </label>
+                </div>
+                <label>Anything else? (dates, goals, space)<textarea name="message" rows="4"></textarea></label>
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">send inquiry</button>
+                    <a href="https://wa.me/16506700843" class="btn btn-outline" target="_blank" rel="noopener">whatsapp me</a>
+                </div>
+                <p class="hint">Sending opens your email app with your details filled in.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" aria-label="Footer">
+        <div class="container footgrid">
+            <div>
+                <div class="brand">
+                    <img src="images/kat-logo-t.png" alt="Kat Yoga logo" class="logo">
+                    <span>yoga & acro with kat ♡</span>
+                </div>
+                <p style="margin:10px 0 0;color:var(--muted)">Tsukuba, Japan</p>
+                <div class="socials">
+                    <a href="https://instagram.com/kat.acro" aria-label="Instagram" target="_blank" rel="noopener">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 5a5 5 0 100 10 5 5 0 000-10zm6-1a1 1 0 100 2 1 1 0 000-2z" /></svg>
+                    </a>
+                    <a href="https://facebook.com/katnewyen/" aria-label="Facebook" target="_blank" rel="noopener">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 22v-8h3l1-4h-4V7a1 1 0 011-1h3V2h-3a5 5 0 00-5 5v3H6v4h3v8h4z" /></svg>
+                    </a>
+                    <a href="https://wa.me/16506700843" aria-label="WhatsApp" target="_blank" rel="noopener">
+                        <i class="fab fa-whatsapp" style="font-size:24px; color:black;"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h3 style="margin:0 0 8px;font-family:'IBM Plex Sans',sans-serif">quick links</h3>
+                <p><a href="journey.html">my journey</a><br><a href="index.html#offerings">classes</a><br><a href="corporate.html">corporate</a><br><a href="index.html#schedule">schedule</a><br><a href="booking.html">book</a><br><a href="resources.html">resources</a></p>
+            </div>
+            <div>
+                <h3 style="margin:0 0 8px;font-family:'IBM Plex Sans',sans-serif">contact</h3>
+                <p style="margin:0 0 6px">Email: <a href="mailto:kathrynnguyen@berkeley.edu">kathrynnguyen@berkeley.edu</a></p>
+                <p style="margin:0 0 12px">Phone/WhatsApp: <a href="https://wa.me/16506700843" target="_blank" rel="noopener">+1 650 670 0843</a></p>
+                <p style="margin:0;color:var(--muted)">© <span id="year"></span> Kathryn Nguyen · RYT-200 Certified Yoga Teacher</p>
+                <div class="badge-wrapper">
+                    <a href="https://app.yogaalliance.org/teacherpublicprofile?id=003TR00001BAbDzYAL" target="_blank" rel="noopener">
+                        <img src="images/RYT200.png" alt="RYT-200 Certification Badge" class="badge">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            const icon = document.querySelector('.mobile-toggle i');
+            menu.classList.toggle('open');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        // Inquiry form → opens the visitor's email app with details prefilled
+        document.getElementById('corpForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const f = new FormData(e.target);
+            const subject = `Corporate yoga inquiry — ${f.get('company')}`;
+            const body = [
+                `Name: ${f.get('name')}`,
+                `Company: ${f.get('company')}`,
+                `Email: ${f.get('email')}`,
+                `Location: ${f.get('location') || '-'}`,
+                `Interested in: ${f.get('format')}`,
+                `Group size: ${f.get('size')}`,
+                '',
+                f.get('message') || ''
+            ].join('\n');
+            window.location.href = `mailto:kathrynnguyen@berkeley.edu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+    </script>
+
+</body>
+</html>
